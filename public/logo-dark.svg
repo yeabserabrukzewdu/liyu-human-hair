@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 60 620 920" width="620" height="920">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&amp;display=swap");
+      .brand-hair {
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-weight: 800;
+        font-size: 84px;
+        letter-spacing: 0.05em;
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+
+  
+
+  <g id="liyu-logo-group">
+    <!-- CIRCULAR EMBLEM -->
+    <circle cx="370" cy="315" r="235" fill="none" stroke="#ffffff" stroke-width="11" />
+
+    <!-- AFRO CURLY HAIR SILHOUETTE -->
+    <path d="
+      M 370 100
+      C 340 95, 305 110, 275 130
+      C 240 120, 205 135, 185 165
+      C 160 170, 140 195, 140 225
+      C 125 245, 125 275, 135 300
+      C 120 325, 125 355, 145 375
+      C 140 395, 150 420, 170 435
+      C 185 450, 210 460, 230 460
+      C 245 475, 275 480, 295 475
+      C 305 485, 325 490, 345 485
+      C 355 490, 375 475, 375 460
+      C 370 435, 365 410, 368 385
+      C 350 375, 340 355, 345 335
+      C 350 320, 365 310, 380 315
+      C 385 295, 375 275, 365 260
+      C 370 240, 390 230, 410 230
+      C 425 230, 440 240, 445 255
+      C 455 240, 475 235, 490 245
+      C 510 260, 515 285, 510 305
+      C 525 315, 535 335, 530 355
+      C 520 380, 495 395, 475 395
+      C 460 415, 445 435, 435 460
+      C 445 485, 455 515, 450 540
+      C 435 520, 420 490, 415 460
+      C 400 450, 390 420, 395 390
+      C 390 365, 375 350, 360 345
+      C 345 340, 340 320, 350 300
+      C 355 285, 370 275, 385 280
+      C 400 260, 425 250, 450 255
+      C 470 235, 495 240, 510 260
+      C 530 245, 550 265, 550 290
+      C 555 315, 545 340, 535 355
+      C 555 365, 560 395, 545 415
+      C 530 435, 505 440, 485 435
+      C 480 415, 475 390, 470 370
+      C 485 360, 495 340, 490 320
+      C 485 305, 470 295, 455 300
+      C 455 270, 435 245, 410 240
+      C 395 210, 365 195, 335 200
+      C 310 180, 275 185, 255 210
+      C 230 205, 205 225, 200 255
+      C 180 265, 170 295, 180 320
+      C 170 345, 180 375, 205 390
+      C 220 420, 250 435, 280 430
+      C 310 445, 345 440, 365 420
+      C 380 435, 405 440, 425 430
+      C 450 445, 480 435, 495 410
+      C 520 410, 540 390, 540 365
+      C 545 335, 535 310, 520 295
+      C 535 275, 530 245, 510 230
+      C 495 210, 465 215, 445 230
+      C 430 205, 400 195, 375 210
+      C 355 185, 325 185, 305 205
+      C 285 190, 260 205, 250 225
+      C 225 215, 200 235, 195 265
+      C 175 280, 165 310, 175 340
+      C 165 370, 180 400, 210 415
+      C 235 435, 270 435, 295 420
+      C 320 440, 355 435, 375 415
+      C 405 430, 435 415, 445 390
+      C 475 390, 495 365, 490 340
+      C 510 325, 515 295, 500 275
+      C 505 250, 485 230, 460 230
+      C 450 205, 425 190, 395 190
+      C 385 160, 355 145, 325 155
+      C 305 135, 275 140, 255 160
+      C 235 145, 210 160, 200 185
+      C 175 195, 160 225, 165 255
+      C 145 275, 145 310, 160 335
+      C 150 365, 170 395, 200 410
+      C 225 435, 260 440, 290 430
+      C 320 445, 355 435, 380 415
+      C 410 425, 440 405, 450 380
+      C 475 375, 490 350, 485 325
+      C 500 310, 500 280, 485 260
+      C 485 235, 465 220, 440 220
+      C 425 195, 395 185, 370 200
+      Z"
+      fill="#ffffff" />
+
+    <!-- INDIVIDUAL CURL COILS & TENDRILS ESCAPING EDGES -->
+    <path d="M 525 285 C 540 275, 555 290, 545 305 C 538 315, 520 315, 520 300 C 520 290, 530 285, 538 290" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" />
+    <path d="M 378 350 C 365 350, 355 365, 362 378 C 368 388, 382 385, 385 372 C 388 360, 375 355, 370 362" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" />
+    <path d="M 432 245 C 438 235, 452 238, 455 248 C 458 258, 448 268, 438 265 C 430 262, 432 250, 440 248" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" />
+
+    <!-- WOMAN PROFILE & FACIAL FEATURES -->
+    <path d="
+      M 435 248
+      C 450 265, 470 285, 485 315
+      C 490 325, 498 335, 510 338
+      C 515 340, 518 343, 515 348
+      C 512 352, 502 352, 495 354
+      C 490 355, 488 360, 495 365
+      C 505 372, 522 375, 520 385
+      C 518 392, 502 395, 490 395
+      C 485 395, 480 400, 488 405
+      C 498 412, 515 420, 505 432
+      C 495 442, 475 442, 460 445
+      C 440 450, 422 470, 415 500
+      C 410 520, 410 545, 415 570
+      "
+      fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- NOSE CONTOUR DETAIL -->
+    <path d="M 502 342 C 496 345, 492 350, 495 355 C 498 358, 504 357, 508 353" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- CLOSED SERENE EYE & RADIANT EYELASHES -->
+    <path d="M 445 305 C 460 312, 478 312, 492 302" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" />
+    <path d="M 452 308 C 450 316, 452 322, 456 325" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 462 311 C 463 320, 468 326, 473 328" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 474 311 C 478 319, 485 323, 491 324" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 484 308 C 490 314, 498 317, 505 316" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 491 303 C 498 307, 506 308, 513 306" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- ARCHED EYEBROW -->
+    <path d="M 432 278 C 452 262, 478 260, 505 272" fill="none" stroke="#ffffff" stroke-width="7.5" stroke-linecap="round" />
+
+    <!-- LUSCIOUS LIPS -->
+    <path d="
+      M 485 372
+      C 495 365, 508 365, 518 375
+      C 510 382, 498 385, 485 380
+      Z"
+      fill="#ffffff" />
+    <path d="
+      M 488 380
+      C 498 392, 510 392, 516 382
+      C 508 388, 496 388, 488 380
+      Z"
+      fill="#ffffff" />
+
+    <!-- BOTANICAL BRANCH ON THE LEFT SIDE OF THE CIRCLE -->
+    <path d="M 235 650 C 180 590, 140 500, 145 380 C 148 300, 175 220, 215 155" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" />
+
+    <!-- LEAF 1: Large lower-left leaf -->
+    <g>
+      <path d="M 175 580 C 110 590, 80 560, 68 535 C 105 525, 145 540, 175 580 Z" fill="#3f3f46" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" />
+      <path d="M 175 580 C 135 555, 100 545, 68 535" fill="none" stroke="#09090b" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 148 565 C 140 550, 135 540, 138 532" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 125 552 C 115 540, 108 532, 105 525" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 152 568 C 145 578, 135 582, 122 585" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 130 555 C 120 565, 110 570, 95 572" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- LEAF 2: Opposing lower leaf -->
+    <g>
+      <path d="M 195 595 C 235 635, 275 645, 305 640 C 290 605, 255 585, 195 595 Z" fill="#3f3f46" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" />
+      <path d="M 195 595 C 240 615, 275 630, 305 640" fill="none" stroke="#09090b" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 235 612 C 245 600, 255 595, 268 595" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 262 624 C 275 615, 285 612, 295 615" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 230 612 C 232 625, 238 635, 248 640" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- LEAF 3: Lateral leaf -->
+    <g>
+      <path d="M 155 490 C 100 480, 80 440, 75 410 C 115 415, 145 445, 155 490 Z" fill="#3f3f46" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" />
+      <path d="M 155 490 C 120 460, 95 435, 75 410" fill="none" stroke="#09090b" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 132 470 C 120 455, 115 442, 118 430" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 110 450 C 100 438, 92 430, 88 420" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+      <path d="M 135 475 C 130 485, 118 490, 105 492" fill="none" stroke="#09090b" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- LEAF 4, 5, 6: Ascending leaf sprigs -->
+    <path d="M 148 400 C 115 375, 105 340, 110 310 C 138 330, 150 365, 148 400 Z" fill="#ffffff" stroke="#ffffff" stroke-width="6" />
+    <path d="M 148 400 C 132 360, 120 335, 110 310" fill="none" stroke="#09090b" stroke-width="3.5" />
+
+    <path d="M 160 325 C 140 290, 145 255, 158 230 C 178 255, 178 290, 160 325 Z" fill="#ffffff" stroke="#ffffff" stroke-width="6" />
+    <path d="M 160 325 C 158 285, 158 255, 158 230" fill="none" stroke="#09090b" stroke-width="3.5" />
+
+    <path d="M 185 240 C 175 205, 185 175, 205 155 C 218 180, 212 215, 185 240 Z" fill="#ffffff" stroke="#ffffff" stroke-width="6" />
+    <path d="M 185 240 C 192 205, 198 180, 205 155" fill="none" stroke="#09090b" stroke-width="3.5" />
+
+    <!-- DELICATE BERRY CLUSTERS -->
+    <path d="M 165 520 C 145 515, 120 515, 105 512" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 125 515 C 115 500, 95 495, 85 490" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+    <path d="M 138 518 C 130 535, 115 545, 100 550" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+    <circle cx="82" cy="488" r="9" fill="#f4f4f5" />
+    <circle cx="102" cy="512" r="9.5" fill="#f4f4f5" />
+    <circle cx="98" cy="552" r="8.5" fill="#f4f4f5" />
+    <circle cx="62" cy="508" r="8" fill="#f4f4f5" />
+
+    <path d="M 152 440 C 170 435, 185 435, 205 440" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+    <path d="M 185 436 C 190 420, 200 410, 215 405" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 195 438 C 205 455, 220 465, 235 470" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="207" cy="440" r="8" fill="#f4f4f5" />
+    <circle cx="218" cy="403" r="8.5" fill="#f4f4f5" />
+    <circle cx="237" cy="472" r="8" fill="#f4f4f5" />
+
+    
+    <!-- ======================================================== -->
+    <!-- BRAND TYPOGRAPHY: "Liyu HAIR" (Exact Calligraphy + Sans) -->
+    <!-- ======================================================== -->
+
+    <!-- "Liyu" IN FLOWING SCRIPT -->
+    <!-- Letter L: Graceful flourish descending and sweeping into the base -->
+    <path d="
+      M 225 675
+      C 200 705, 155 755, 115 805
+      C 95 830, 75 855, 60 885
+      C 50 905, 58 920, 75 922
+      C 95 925, 125 905, 160 865
+      C 195 825, 220 780, 225 750
+      C 215 765, 185 810, 140 855
+      C 105 890, 80 910, 68 908
+      C 62 905, 65 890, 80 870
+      C 105 835, 150 780, 210 705
+      C 230 680, 240 665, 225 675
+      Z"
+      fill="#ffffff" />
+
+    <!-- Flourish sweep connecting L to i -->
+    <path d="
+      M 75 918
+      C 110 905, 155 865, 205 815
+      C 230 790, 255 765, 280 770
+      C 270 780, 245 810, 215 840
+      C 170 885, 120 920, 75 918
+      Z"
+      fill="#ffffff" />
+
+    <!-- Letter i: Stem, exit curve, and slanted dot -->
+    <path d="
+      M 270 775
+      C 285 755, 298 740, 310 740
+      C 320 740, 315 760, 305 785
+      C 295 810, 290 830, 300 835
+      C 310 840, 325 825, 345 800
+      C 340 812, 325 835, 308 842
+      C 290 850, 278 838, 285 815
+      C 292 795, 302 770, 295 765
+      C 288 760, 278 770, 270 775
+      Z"
+      fill="#ffffff" />
+    <!-- Dot of i -->
+    <ellipse cx="370" cy="725" rx="14" ry="9" transform="rotate(-30 370 725)" fill="#ffffff" />
+
+    <!-- Letter y: Graceful double basin, long descending tail looping back -->
+    <path d="
+      M 345 800
+      C 360 780, 375 765, 390 765
+      C 400 765, 395 785, 385 810
+      C 375 835, 385 845, 400 840
+      C 415 835, 435 810, 455 775
+      C 465 758, 475 745, 482 748
+      C 488 752, 480 775, 465 810
+      C 445 855, 415 915, 375 960
+      C 350 990, 325 1005, 308 995
+      C 295 985, 300 965, 320 940
+      C 350 900, 400 845, 445 790
+      C 425 820, 385 870, 348 915
+      C 325 942, 315 960, 320 968
+      C 325 972, 340 965, 362 940
+      C 395 905, 428 850, 452 795
+      C 462 772, 465 765, 460 765
+      C 455 765, 440 788, 420 820
+      C 400 852, 375 860, 360 845
+      C 350 835, 355 815, 365 792
+      C 375 772, 370 765, 360 770
+      C 350 778, 340 792, 345 800
+      Z"
+      fill="#ffffff" />
+
+    <!-- Letter u: Double basin and graceful exit sweep -->
+    <path d="
+      M 480 775
+      C 498 755, 515 745, 528 748
+      C 538 752, 532 772, 520 798
+      C 510 820, 512 835, 525 835
+      C 540 835, 560 812, 580 780
+      C 592 760, 602 750, 612 752
+      C 620 758, 610 780, 595 810
+      C 578 845, 555 860, 535 858
+      C 515 855, 500 840, 508 815
+      C 515 792, 525 772, 518 768
+      C 510 765, 498 775, 480 775
+      Z"
+      fill="#ffffff" />
+
+    <!-- Bold Sans-Serif: "HAIR" directly underneath the right side -->
+    <text x="390" y="895" class="brand-hair">HAIR</text>
+    
+  </g>
+</svg>
