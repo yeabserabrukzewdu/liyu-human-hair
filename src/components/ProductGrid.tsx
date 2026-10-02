@@ -5,6 +5,7 @@ import { PRODUCTS, COLOR_SWATCHES } from '../data/products';
 import { ProductCard } from './ProductCard';
 
 export const ProductGrid: React.FC = () => {
+  const [selectedDonor, setSelectedDonor] = useState<'all' | 'Double Donor' | 'Super Double Donor'>('all');
   const [selectedTexture, setSelectedTexture] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
   const [selectedLength, setSelectedLength] = useState<number | 'all'>('all');
@@ -38,12 +39,14 @@ export const ProductGrid: React.FC = () => {
   const lengths = [10, 12, 14, 16, 18, 20, 22, 24, 26, 28];
 
   const activeFilterCount =
+    (selectedDonor !== 'all' ? 1 : 0) +
     (selectedTexture !== 'all' ? 1 : 0) +
     (selectedColor !== 'all' ? 1 : 0) +
     (selectedLength !== 'all' ? 1 : 0) +
     (priceMax < 110 ? 1 : 0);
 
   const resetFilters = () => {
+    setSelectedDonor('all');
     setSelectedTexture('all');
     setSelectedColor('all');
     setSelectedLength('all');
@@ -53,6 +56,10 @@ export const ProductGrid: React.FC = () => {
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
+      // Donor match
+      if (selectedDonor !== 'all' && product.donorCategory !== selectedDonor) {
+        return false;
+      }
       // Texture match
       if (selectedTexture !== 'all' && product.category !== selectedTexture) {
         return false;
@@ -78,7 +85,7 @@ export const ProductGrid: React.FC = () => {
       // Default: featured (preserve catalog order)
       return a.catalogNumber - b.catalogNumber;
     });
-  }, [selectedTexture, selectedColor, selectedLength, priceMax, sortBy]);
+  }, [selectedDonor, selectedTexture, selectedColor, selectedLength, priceMax, sortBy]);
 
   return (
     <section id="catalog-section" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -88,14 +95,13 @@ export const ProductGrid: React.FC = () => {
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#6A7563] font-bold mb-2">
             <span>Human Hair Shop</span>
             <span className="w-1 h-1 rounded-full bg-[#95B373]" />
-            <span>100% Real Virgin & Raw Hair</span>
+            <span>Double & Super Double Donors</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif text-[#1B2017] tracking-tight">
             Human Hair Bundles
           </h2>
           <p className="text-sm text-[#5D6755] mt-1 font-light max-w-xl">
-            Real human hair with cuticles aligned. Explore our 7 hair types, various lengths,
-            and colors. Every item is sold as 1 bundle.
+            Real human hair with cuticles aligned. Double Donors (85%–90% equal length, Brazil) & Super Double Donors (100% equal length, Vietnam). All shown with 1 piece price.
           </p>
         </div>
 
@@ -132,6 +138,45 @@ export const ProductGrid: React.FC = () => {
             <ChevronDown className="w-3.5 h-3.5 text-[#6A7563] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
         </div>
+      </div>
+
+      {/* Donor Category Selector Tabs: Double Donors (Brazil · 85-90%) vs Super Double Donors (Vietnam · 100%) */}
+      <div className="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-[#EFEAE0]">
+        <span className="text-[11px] uppercase tracking-wider text-[#6A7563] font-bold mr-1">
+          Donor Grade:
+        </span>
+        <button
+          onClick={() => setSelectedDonor('all')}
+          className={`px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-xs border transition-all cursor-pointer ${
+            selectedDonor === 'all'
+              ? 'bg-[#1B2017] text-white border-[#1B2017] shadow-xs'
+              : 'bg-white text-[#4A5543] border-[#DDD5C7] hover:border-[#1B2017]'
+          }`}
+        >
+          All ({PRODUCTS.length})
+        </button>
+        <button
+          onClick={() => setSelectedDonor('Double Donor')}
+          className={`px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-xs border transition-all cursor-pointer flex items-center gap-1.5 ${
+            selectedDonor === 'Double Donor'
+              ? 'bg-[#95B373] text-white border-[#95B373] shadow-xs'
+              : 'bg-white text-[#2B3E1F] border-[#DDD5C7] hover:border-[#95B373]'
+          }`}
+        >
+          <span>Double Donors</span>
+          <span className="text-[10px] font-normal opacity-85">(85%–90% · Brazil)</span>
+        </button>
+        <button
+          onClick={() => setSelectedDonor('Super Double Donor')}
+          className={`px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-xs border transition-all cursor-pointer flex items-center gap-1.5 ${
+            selectedDonor === 'Super Double Donor'
+              ? 'bg-[#95B373] text-white border-[#95B373] shadow-xs'
+              : 'bg-white text-[#2B3E1F] border-[#DDD5C7] hover:border-[#95B373]'
+          }`}
+        >
+          <span>Super Double Donors</span>
+          <span className="text-[10px] font-normal opacity-85">(100% · Vietnam)</span>
+        </button>
       </div>
 
       {/* Texture Categories Horizontal Scroller */}

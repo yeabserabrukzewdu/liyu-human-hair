@@ -348,15 +348,15 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
             <div className="bg-white p-4 border border-[#DDD5C7] rounded-xs grid grid-cols-2 gap-3 text-xs text-[#55634E] shadow-2xs">
               <div className="flex items-center gap-2">
                 <Package className="w-4 h-4 text-[#95B373] shrink-0" />
-                <span><strong>Sold as 1 Bundle</strong> (~100g)</span>
+                <span><strong>1 Piece Price</strong> (~100g)</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#95B373] shrink-0" />
-                <span>100% Real Human Hair</span>
+                <span>{product.origin}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-[#95B373] shrink-0" />
-                <span>Cuticles in One Direction</span>
+                <span>{product.donorFullness}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Truck className="w-4 h-4 text-[#95B373] shrink-0" />
@@ -371,10 +371,12 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
           <div className="lg:col-span-6 space-y-6">
             <div>
               {/* Category & Verified Reviews */}
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#95B373] font-bold mb-1.5">
+              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider text-[#95B373] font-bold mb-1.5">
                 <span>{product.category}</span>
                 <span className="text-[#888888]">·</span>
-                <span className="text-[#6A7563] font-normal">100% Real Human Hair</span>
+                <span className="text-[#2B3E1F]">{product.donorCategory}</span>
+                <span className="text-[#888888]">·</span>
+                <span className="text-[#6A7563] font-normal">{product.origin}</span>
               </div>
 
               {/* Product Title */}
@@ -402,7 +404,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
             </div>
 
             {/* ==================================================== */}
-            {/* CLEAR "SOLD AS 1 BUNDLE" NOTICE BOX                  */}
+            {/* CLEAR "1 PIECE PRICE" NOTICE BOX                     */}
             {/* ==================================================== */}
             <div className="p-4 bg-white border border-[#95B373] rounded-xs shadow-2xs">
               <div className="flex items-start gap-3">
@@ -412,15 +414,17 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
                 <div className="flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="text-sm font-bold text-[#1B2017]">
-                      Sold as 1 Bundle
+                      1 Piece Price
                     </h3>
                     <span className="text-[11px] font-bold text-[#2B3E1F] bg-[#95B373]/20 px-2 py-0.5 rounded-xs">
-                      1 Unit = 1 Bundle
+                      1 Piece (~100g)
                     </span>
                   </div>
                   <p className="text-xs text-[#55634E] mt-1 leading-normal">
-                    The price shown is for <strong>ONE bundle</strong> (~100 grams).
-                    To purchase more hair for a full look, choose your desired bundle count below.
+                    The price shown is the <strong>1 piece price</strong> (~100 grams).
+                    {product.donorCategory === 'Double Donor'
+                      ? ' Double Donor Brazilian human hair with 85%–90% equal length from top to bottom.'
+                      : ' Super Double Donor Vietnamese human hair with 100% equal length from top to bottom.'}
                   </p>
                 </div>
               </div>
@@ -429,13 +433,17 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
             {/* Dynamic Price Display */}
             <div className="p-4 bg-white border border-[#DDD5C7] rounded-xs flex flex-wrap items-baseline justify-between gap-3 shadow-2xs">
               <div>
-                <span className="text-3xl sm:text-4xl font-serif text-[#1B2017] font-semibold">
-                  ${currentPrice}
-                </span>
-                <span className="text-sm text-[#6A7563] ml-2">USD for 1 bundle</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl sm:text-4xl font-serif text-[#1B2017] font-semibold">
+                    ${currentPrice}
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold text-[#2B3E1F] bg-[#95B373]/20 px-2.5 py-1 rounded-xs">
+                    1 piece price
+                  </span>
+                </div>
                 {quantity > 1 && (
-                  <div className="text-xs font-mono font-bold text-[#2B3E1F] mt-1">
-                    Total: ${totalPrice} USD (${currentPrice} × {quantity} bundles)
+                  <div className="text-xs font-mono font-bold text-[#2B3E1F] mt-1.5">
+                    Total: ${totalPrice} USD (${currentPrice} × {quantity} pieces)
                   </div>
                 )}
               </div>
@@ -756,10 +764,10 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
                 <div className="text-xs text-[#55604E] space-y-3">
                   <div className="p-3 bg-white border border-[#DDD5C7] rounded-xs">
                     <span className="font-bold text-[#1B2017] block">
-                      Price List for {product.name} (Sold as 1 Bundle)
+                      Price List for {product.name} (1 Piece Price)
                     </span>
                     <p className="text-[11px] text-[#6A7563] mt-0.5">
-                      All prices below are in USD for 1 individual bundle.
+                      All prices below are 1 piece price in USD (~100g bundle).
                     </p>
                   </div>
                   <div className="divide-y divide-[#EFEAE0] bg-white border border-[#DDD5C7] rounded-xs p-3">
@@ -886,7 +894,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Catalog</span>
           </button>
-          <span>LIYU Human Hair • 100% Real Virgin & Raw Bundles • Sold as 1 bundle</span>
+          <span>LIYU Human Hair • Brazilian & Vietnamese Human Hair • 1 Piece Price</span>
           <span>DHL Express Worldwide Delivery</span>
         </div>
       </footer>

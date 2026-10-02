@@ -110,8 +110,8 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   },
   {
     id: 'notif-vip-drop',
-    title: 'New Harvest: Raw Burmese Single-Donor Hair',
-    message: 'Strictly limited batch of 100% cuticle-aligned Raw Burmese Virgin hair now available in 18"-28".',
+    title: 'New Collection: Burmese Double Donor Hair',
+    message: 'New batch of 100% cuticle-aligned Double Donor Brazilian hair now available in 18"-28".',
     timestamp: '2h ago',
     type: 'vip',
     read: true,

@@ -80,19 +80,19 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
               onClick={() => handleNavClick('catalog-section')}
               className="hover:text-[#1B2017] transition-colors cursor-pointer"
             >
-              All Hair Products
+              All Products
             </button>
             <button
-              onClick={() => handleNavClick('raw-hair-section')}
+              onClick={() => handleNavClick('donor-guide-section')}
               className="hover:text-[#1B2017] transition-colors cursor-pointer"
             >
-              Raw Hair
+              Fullness Guide
             </button>
             <button
               onClick={() => handleNavClick('catalog-section')}
               className="hover:text-[#1B2017] transition-colors cursor-pointer"
             >
-              Virgin Bundles
+              Brazilian & Vietnamese Hair
             </button>
             <button
               onClick={() => openComplianceModal('compliance')}
@@ -183,10 +183,10 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
               All Hair Products (7 Hair Types)
             </button>
             <button
-              onClick={() => handleNavClick('raw-hair-section')}
+              onClick={() => handleNavClick('donor-guide-section')}
               className="text-left hover:text-[#1B2017] py-1 cursor-pointer font-medium"
             >
-              Single Donor Raw Hair
+              Fullness Guide (Double & Super Double)
             </button>
             <button
               onClick={() => {
@@ -209,7 +209,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
               <span className="text-[10px] text-[#95B373] font-semibold uppercase tracking-wider">Compliance</span>
             </button>
             <div className="pt-4 border-t border-[#E8E2D5] flex items-center justify-between text-xs text-[#737C6D] font-sans normal-case tracking-normal">
-              <span>100% Real Virgin & Raw Hair</span>
+              <span>Brazilian & Vietnamese Human Hair</span>
               <span>Fast DHL Delivery</span>
             </div>
           </div>

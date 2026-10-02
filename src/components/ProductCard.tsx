@@ -64,11 +64,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               Bestseller
             </span>
           )}
-          {product.category === 'Raw Hair' && (
-            <span className="px-2 py-0.5 bg-[#FAF7F2]/95 backdrop-blur-md text-[#2C401D] border border-[#DDD5C7] text-[9px] uppercase tracking-widest rounded-xs font-bold">
-              Single Donor
-            </span>
-          )}
+          <span className="px-2 py-0.5 bg-[#FAF7F2]/95 backdrop-blur-md text-[#2C401D] border border-[#DDD5C7] text-[9px] uppercase tracking-widest rounded-xs font-bold">
+            {product.donorCategory}
+          </span>
         </div>
 
         {/* Catalog Index Monogram */}
@@ -105,7 +103,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             ) : (
               <>
                 <Plus className="w-3.5 h-3.5" />
-                <span>Quick Add 1 Bundle ({defaultVariant.length}")</span>
+                <span>Quick Add 1 Piece ({defaultVariant.length}")</span>
               </>
             )}
           </button>
@@ -169,19 +167,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="mt-4 pt-3 border-t border-[#EFEAE0] flex items-center justify-between">
           <div>
             <span className="text-[10px] text-[#2B3E1F] font-bold block uppercase tracking-wider">
-              Sold as 1 Bundle
+              {product.origin}
             </span>
             <div className="text-xs font-mono text-[#6A7463]">
               {Math.min(...product.availableLengths)}" - {Math.max(...product.availableLengths)}"
             </div>
           </div>
           <div className="text-right">
-            <span className="text-sm sm:text-base font-serif font-semibold text-[#1B2017]">
-              {product.basePrice === product.maxPrice
-                ? `$${product.basePrice}`
-                : `$${product.basePrice} - $${product.maxPrice}`}
+            <div className="flex items-baseline justify-end gap-1.5">
+              <span className="text-sm sm:text-base font-serif font-semibold text-[#1B2017]">
+                {product.basePrice === product.maxPrice
+                  ? `$${product.basePrice}`
+                  : `$${product.basePrice} - $${product.maxPrice}`}
+              </span>
+              <span className="text-[11px] text-[#2B3E1F] font-bold font-sans">
+                1 piece price
+              </span>
+            </div>
+            <span className="text-[10px] text-[#788272] block -mt-0.5 font-medium">
+              {product.donorFullness}
             </span>
-            <span className="text-[10px] text-[#788272] block -mt-0.5">USD for 1 bundle</span>
           </div>
         </div>
       </div>

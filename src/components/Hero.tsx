@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ShieldCheck, Flame, Truck, Award } from 'lucide-react';
+import { ArrowDown, ShieldCheck, Sparkles, Truck, Award } from 'lucide-react';
 import { Logo } from './Logo';
 
 interface HeroProps {
@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg text-[#555F4F] max-w-2xl font-light leading-relaxed mb-10 tracking-wide">
-          Soft, natural, and long-lasting hair bundles from 10 inches to 28 inches. Each item is sold as 1 bundle. Safe to bleach, dye, and style with heat.
+          Premium Brazilian & Vietnamese human hair bundles in Double Donor (85%–90% equal length) and Super Double Donor (100% equal length). All items listed with 1 piece price.
         </p>
 
         {/* CTA Buttons */}
@@ -46,12 +46,12 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
           <button
             id="hero-raw-hair-btn"
             onClick={() => {
-              const el = document.getElementById('raw-hair-section');
+              const el = document.getElementById('donor-guide-section');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
             className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-[#F2ECE0] text-[#1B2017] border border-[#DDD5C7] font-semibold text-xs uppercase tracking-[0.22em] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer rounded-xs shadow-xs"
           >
-            <span>Explore Raw Hair</span>
+            <span>Donor Fullness Guide</span>
           </button>
         </div>
 
@@ -61,23 +61,23 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
             <ShieldCheck className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
             <div>
               <h4 className="text-xs uppercase tracking-wider text-[#1B2017] font-semibold">100% Real Hair</h4>
-              <p className="text-[11px] text-[#697262] mt-0.5">No synthetic hair or harsh chemicals</p>
+              <p className="text-[11px] text-[#697262] mt-0.5">No synthetic hair or silicone coatings</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3">
             <Award className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
             <div>
-              <h4 className="text-xs uppercase tracking-wider text-[#1B2017] font-semibold">Cuticles in One Way</h4>
-              <p className="text-[11px] text-[#697262] mt-0.5">Tangle-free, lasts over 2 years</p>
+              <h4 className="text-xs uppercase tracking-wider text-[#1B2017] font-semibold">Cuticles Aligned</h4>
+              <p className="text-[11px] text-[#697262] mt-0.5">Unidirectional, tangle-free flow</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3">
-            <Flame className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
+            <Sparkles className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
             <div>
-              <h4 className="text-xs uppercase tracking-wider text-[#1B2017] font-semibold">Bleach & Heat Safe</h4>
-              <p className="text-[11px] text-[#697262] mt-0.5">Safe to bleach to blonde, style with heat</p>
+              <h4 className="text-xs uppercase tracking-wider text-[#1B2017] font-semibold">Double & Super Double</h4>
+              <p className="text-[11px] text-[#697262] mt-0.5">85%–90% & 100% equal length</p>
             </div>
           </div>
 

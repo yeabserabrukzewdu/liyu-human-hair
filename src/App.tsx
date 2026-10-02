@@ -41,7 +41,7 @@ const AppContent: React.FC = () => {
         {/* Catalog Grid with Textures, Colors, Lengths, and Price Filters */}
         <ProductGrid />
 
-        {/* Single-Donor Raw Hair Spotlight (Atelier Blondes & Raw Burmese) */}
+        {/* Double Donors & Super Double Donors Fullness Guide */}
         <RawHairSpotlight />
 
         {/* Personalized Recommendations Based on Browsing History */}

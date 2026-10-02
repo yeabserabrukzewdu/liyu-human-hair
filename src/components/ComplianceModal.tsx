@@ -180,7 +180,7 @@ export const ComplianceModal: React.FC = () => {
                   <strong>Unit of Sale:</strong> Every product in our atelier catalog is clearly sold as <strong>1 individual bundle</strong> (~100 grams / 3.5 oz net weight each) unless explicitly labeled otherwise in product title.
                 </p>
                 <p className="text-xs text-[#53604C]">
-                  <strong>Material Authenticity:</strong> 100% genuine virgin human hair or single-donor raw hair. Absolutely no synthetic hair fibers, animal fibers, or silicone coatings are used.
+                  <strong>Material Authenticity:</strong> 100% genuine human hair in Double Donors (85%–90% equal length, Brazil) and Super Double Donors (100% equal length, Vietnam). Absolutely no synthetic hair fibers, animal fibers, or silicone coatings are used.
                 </p>
                 <p className="text-xs text-[#53604C]">
                   <strong>Billing Currency:</strong> All transactions are priced and billed in <strong>United States Dollars ($ USD)</strong>. Total order amounts, including free express shipping and applicable sales taxes, are itemized prior to final payment authorization.
@@ -399,9 +399,9 @@ export const ComplianceModal: React.FC = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-bold text-[#1B2017] uppercase tracking-wider mb-1">3. Products, Specifications & Sold-As-Bundle Disclosure</h4>
+                  <h4 className="font-bold text-[#1B2017] uppercase tracking-wider mb-1">3. Products, Specifications & 1 Piece Price Disclosure</h4>
                   <p>
-                    LIYU Human Hair specializes in 100% human hair extensions, including cuticle-aligned virgin hair and single-donor raw hair. <strong>Every hair item is sold as 1 bundle (~100 grams / 3.5 oz)</strong> unless explicitly indicated. Due to the genuine biological nature of raw human hair, subtle variances in natural donor color undertones and wave patterns are natural hallmarks of authenticity.
+                    LIYU Human Hair specializes in 100% human hair extensions, including cuticle-aligned Double Donors and Super Double Donors. <strong>Every hair item is listed with 1 piece price (~100 grams / 3.5 oz)</strong> unless explicitly indicated. Due to the genuine biological nature of human hair, subtle variances in natural donor color undertones and wave patterns are natural hallmarks of authenticity.
                   </p>
                 </div>
 

@@ -21,6 +21,8 @@ export type HairTexture =
   | 'Body Wave'
   | 'Pixie Curl';
 
+export type DonorCategory = 'Double Donor' | 'Super Double Donor';
+
 export interface ProductVariant {
   id: string;
   color: HairColor;
@@ -51,6 +53,8 @@ export interface Product {
   cuticleStatus: string;
   origin: string;
   donorType: string;
+  donorCategory: DonorCategory;
+  donorFullness: string;
   weightGrams: number;
   rating: number;
   reviewCount: number;

@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
             </div>
 
             <p className="text-xs text-[#5D6756] font-light leading-relaxed max-w-sm">
-              100% real virgin and raw human hair bundles. Cuticles in one direction, strong double wefts, and zero chemical mixing. Every item is sold as 1 bundle.
+              Brazilian & Vietnamese human hair bundles in Double Donors (85%–90% equal length) and Super Double Donors (100% equal length). Every item is displayed with 1 piece price.
             </p>
 
             <div className="flex items-center gap-4 text-xs pt-2">

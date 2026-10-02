@@ -277,7 +277,7 @@ const OrderTrackerContent: React.FC = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>Cuticle Guarantee:</span>
-                    <span className="text-[#2B3E1F] font-bold">100% Verified Single Donor</span>
+                    <span className="text-[#2B3E1F] font-bold">100% Cuticles Aligned</span>
                   </div>
                 </div>
               </div>

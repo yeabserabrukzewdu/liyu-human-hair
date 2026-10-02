@@ -181,8 +181,8 @@ const CartDrawerContent: React.FC = () => {
                         ${item.variant.price * item.quantity} USD
                       </span>
                       {item.quantity > 1 && (
-                        <span className="text-[10px] text-[#7A8574] block">
-                          (${item.variant.price} ea)
+                        <span className="text-[10px] text-[#2B3E1F] font-semibold block">
+                          (${item.variant.price} 1 piece price)
                         </span>
                       )}
                     </div>
@@ -197,7 +197,7 @@ const CartDrawerContent: React.FC = () => {
               </div>
               <p className="text-sm font-serif text-[#1B2017] font-medium mb-2">Your shopping bag is empty</p>
               <p className="text-xs text-[#6A7563] max-w-xs mx-auto mb-6">
-                Discover our single-donor raw hair and 100% virgin human hair textures.
+                Discover our Double Donor and Super Double Donor Brazilian & Vietnamese human hair textures.
               </p>
               <button
                 onClick={() => setIsCartOpen(false)}
