@@ -152,7 +152,7 @@ export const Logo: React.FC<LogoProps> = ({
             className={`tracking-[0.35em] uppercase text-[7px] md:text-[8px] mt-0.5 font-normal ${subColorClass}`}
             style={{ fontFamily: "'Roboto', sans-serif" }}
           >
-            ATELIER • 100% RAW VIRGIN
+            ATELIER • PREMIUM HUMAN HAIR
           </span>
         </div>
       )}

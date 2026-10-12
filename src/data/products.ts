@@ -15,15 +15,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=85',
+      '/1.webp',
     ],
     colorImages: {
-      Black: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85',
+      Black: '/1.webp',
     },
     colorThumbnails: {
-      Black: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=200&q=80',
+      Black: '/1.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -63,17 +61,17 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black', 'Piano', 'Coffee Brown'],
     availableLengths: [12, 14, 16, 18, 20],
     images: [
-      'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=1200&q=85',
+      '/5.webp',
       'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85',
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
     ],
     colorImages: {
-      Black: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=1200&q=85',
+      Black: '/5.webp',
       Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85',
       'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
     },
     colorThumbnails: {
-      Black: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=200&q=80',
+      Black: '/5.webp',
       Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
       'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
     },
@@ -124,19 +122,19 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black', 'Coffee Brown', 'Half Coffee Brown', 'Burgundy', 'Piano'],
     availableLengths: [10, 12, 14, 16, 18, 20],
     images: [
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=85',
+      '/3.webp',
       'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=85',
       'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=85',
     ],
     colorImages: {
-      Black: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=85',
+      Black: '/3.webp',
       'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
       'Half Coffee Brown': 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=85',
       Burgundy: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=85',
       Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85',
     },
     colorThumbnails: {
-      Black: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+      Black: '/3.webp',
       'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
       'Half Coffee Brown': 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=200&q=80',
       Burgundy: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=200&q=80',
@@ -199,15 +197,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85',
+      '/6.webp',
     ],
     colorImages: {
-      Black: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1200&q=85',
+      Black: '/6.webp',
     },
     colorThumbnails: {
-      Black: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=200&q=80',
+      Black: '/6.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -246,15 +242,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [18, 20, 22, 24, 26, 28],
     images: [
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=85',
+      '/4.webp',
     ],
     colorImages: {
-      Black: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=85',
+      Black: '/4.webp',
     },
     colorThumbnails: {
-      Black: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+      Black: '/4.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -295,17 +289,17 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black', 'Coffee Brown', 'Highlight'],
     availableLengths: [16, 18, 20],
     images: [
-      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85',
+      '/2.webp',
       'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=1200&q=85',
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
     ],
     colorImages: {
-      Black: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85',
+      Black: '/2.webp',
       'Coffee Brown': 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=1200&q=85',
       Highlight: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
     },
     colorThumbnails: {
-      Black: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=200&q=80',
+      Black: '/2.webp',
       'Coffee Brown': 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=200&q=80',
       Highlight: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
     },
@@ -403,13 +397,13 @@ export const COLOR_SWATCHES: Record<string, { bg: string; border: string; name: 
     bg: '#171717',
     border: '#404040',
     name: 'Black',
-    thumbnail: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/1.webp',
   },
   'Natural Black': {
     bg: '#171717',
     border: '#404040',
     name: 'Black',
-    thumbnail: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/1.webp',
   },
   'Coffee Brown': {
     bg: '#3e2723',
@@ -481,7 +475,7 @@ export const INITIAL_ORDERS: import('../types').Order[] = [
       {
         productId: 'liyu-burmese',
         productName: 'Burmese Human Hair',
-        image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+        image: '/4.webp',
         color: 'Black',
         length: 24,
         price: 92,
@@ -490,7 +484,7 @@ export const INITIAL_ORDERS: import('../types').Order[] = [
       {
         productId: 'liyu-ocean-wave',
         productName: 'Ocean Wave Human Hair',
-        image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80',
+        image: '/2.webp',
         color: 'Highlight',
         length: 20,
         price: 89,

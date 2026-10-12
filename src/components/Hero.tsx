@@ -9,11 +9,16 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
 
   return (
-    <section className="relative min-h-[88vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#F4EFE6] to-[#FAF7F2]">
-      {/* Editorial ambient background with soft sage warmth */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#95B373]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-[#E5DCCB]/40 rounded-full blur-2xl" />
+    <section className="relative min-h-[88vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#FAF7F2]">
+      {/* Editorial ambient background with soft gradient overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20 overflow-hidden">
+        <img
+          src="/landing.webp"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center blur-3xl scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/85 to-[#FAF7F2]" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
@@ -55,8 +60,40 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
           </button>
         </div>
 
+        {/* Landing Page Showcase Image with Simple Gradient */}
+        <div className="w-full mt-12 sm:mt-14 relative group overflow-hidden border border-[#DDD5C7] rounded-xs shadow-xl bg-[#EAE2D5]">
+          <div className="relative aspect-16/10 sm:aspect-16/9 lg:aspect-21/9 overflow-hidden">
+            <img
+              src="/landing.webp"
+              alt="Liyu Human Hair Collection - Brazilian and Vietnamese Bundles"
+              className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700 ease-out"
+              loading="eager"
+            />
+            {/* Simple gradient overlay across the image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent pointer-events-none" />
+
+            {/* Understated luxury caption overlay */}
+            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2 text-white pointer-events-none text-left">
+              <div>
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#D0DEB5] font-semibold block mb-1">
+                  The Atelier Campaign
+                </span>
+                <p className="font-serif text-base sm:text-xl font-medium text-white leading-tight drop-shadow-xs">
+                  Brazilian & Vietnamese Pure Human Hair Bundles
+                </p>
+              </div>
+              <div className="text-left sm:text-right">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FAF7F2]/80 font-mono">
+                  Double & Super Double Donors · 1 Piece Price
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Luxury Trust Markers */}
-        <div className="mt-16 sm:mt-20 pt-8 border-t border-[#E5DFD2] w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+        <div className="mt-12 sm:mt-16 pt-8 border-t border-[#E5DFD2] w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
           <div className="flex items-start gap-3">
             <ShieldCheck className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
             <div>

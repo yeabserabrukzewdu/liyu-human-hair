@@ -37,9 +37,9 @@ export const SearchModal: React.FC = () => {
 
   const popularSearches = [
     'Deep Frizz 24"',
-    'Raw Burmese Virgin',
+    'Burmese Double Donor',
     'Ocean Wave Highlight',
-    'Raw Hair Ash Blonde 20"',
+    'Super Double Donor Pixie',
     'Pixie Curl Piano',
     'Fumi Burgundy',
     'Body Wave 28"',

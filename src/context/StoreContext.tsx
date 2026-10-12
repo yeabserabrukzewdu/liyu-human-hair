@@ -3,8 +3,27 @@ import { Product, ProductVariant, CartItem, Order, NotificationItem, BrowsingHis
 import { PRODUCTS, INITIAL_ORDERS } from '../data/products';
 
 export type ComplianceTab = 'compliance' | 'terms' | 'privacy' | 'refund' | 'shipping' | 'security';
+export type AppPage = 'home' | 'collections' | 'stores';
 
 interface StoreContextType {
+  // Navigation & Multi-page
+  currentPage: AppPage;
+  setCurrentPage: (page: AppPage) => void;
+  selectedCollectionDonor: 'all' | 'Double Donor' | 'Super Double Donor';
+  setSelectedCollectionDonor: (donor: 'all' | 'Double Donor' | 'Super Double Donor') => void;
+  selectedCollectionTexture: string;
+  setSelectedCollectionTexture: (texture: string) => void;
+  selectedStoreId: string | null;
+  setSelectedStoreId: (storeId: string | null) => void;
+  navigateToPage: (
+    page: AppPage,
+    options?: {
+      donor?: 'all' | 'Double Donor' | 'Super Double Donor';
+      texture?: string;
+      storeId?: string;
+    }
+  ) => void;
+
   // Cart
   cart: CartItem[];
   addToCart: (product: Product, variant: ProductVariant, quantity?: number) => void;
@@ -194,6 +213,52 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   });
 
   const [activeToast, setActiveToast] = useState<NotificationItem | null>(null);
+
+  // Multi-page navigation state
+  const [currentPage, setCurrentPage] = useState<AppPage>(() => {
+    try {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'collections' || hash === 'hair-collections') return 'collections';
+      if (hash === 'stores' || hash === 'our-stores') return 'stores';
+    } catch {
+      // ignore
+    }
+    return 'home';
+  });
+
+  const [selectedCollectionDonor, setSelectedCollectionDonor] = useState<'all' | 'Double Donor' | 'Super Double Donor'>('all');
+  const [selectedCollectionTexture, setSelectedCollectionTexture] = useState<string>('all');
+  const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
+
+  const navigateToPage = (
+    page: AppPage,
+    options?: {
+      donor?: 'all' | 'Double Donor' | 'Super Double Donor';
+      texture?: string;
+      storeId?: string;
+    }
+  ) => {
+    if (options?.donor) {
+      setSelectedCollectionDonor(options.donor);
+    }
+    if (options?.texture) {
+      setSelectedCollectionTexture(options.texture);
+    }
+    if (options?.storeId !== undefined) {
+      setSelectedStoreId(options.storeId);
+    }
+    setCurrentPage(page);
+    try {
+      if (page === 'home') {
+        window.history.pushState(null, '', window.location.pathname);
+      } else {
+        window.history.pushState(null, '', `#${page === 'collections' ? 'hair-collections' : 'our-stores'}`);
+      }
+    } catch {
+      // ignore
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Modal / Drawer open states
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -690,6 +755,16 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         markNotificationRead,
         activeToast,
         dismissToast,
+
+        currentPage,
+        setCurrentPage,
+        selectedCollectionDonor,
+        setSelectedCollectionDonor,
+        selectedCollectionTexture,
+        setSelectedCollectionTexture,
+        selectedStoreId,
+        setSelectedStoreId,
+        navigateToPage,
 
         isCartOpen,
         setIsCartOpen,

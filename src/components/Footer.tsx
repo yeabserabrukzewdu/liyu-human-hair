@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check, ShieldCheck, Lock, Truck, FileText } from 'lucide-react';
+import { ArrowRight, Check, ShieldCheck, Lock, Truck, MapPin } from 'lucide-react';
 import { Logo } from './Logo';
 import { StripeLogo, PayPalLogo, VisaLogo, MastercardLogo } from './PaymentLogos';
 import { useStore } from '../context/StoreContext';
 
 export const Footer: React.FC = () => {
-  const { openComplianceModal } = useStore();
+  const { openComplianceModal, navigateToPage } = useStore();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -24,12 +24,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#E5DFD2]">
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="mb-2">
+            <div className="mb-2 cursor-pointer" onClick={() => navigateToPage('home')}>
               <Logo size="md" layout="horizontal" variant="light" />
             </div>
 
             <p className="text-xs text-[#5D6756] font-light leading-relaxed max-w-sm">
-              Brazilian & Vietnamese human hair bundles in Double Donors (85%–90% equal length) and Super Double Donors (100% equal length). Every item is displayed with 1 piece price.
+              Brazilian & Vietnamese human hair bundles in Double Donors (85%–90% equal length) and Super Double Donors (100% equal length). Every item is displayed with our exact 1 piece price.
             </p>
 
             <div className="flex items-center gap-4 text-xs pt-2">
@@ -44,70 +44,133 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Links: Textures */}
+          {/* Quick Links: Hair Collections */}
           <div>
             <h4 className="text-xs uppercase tracking-[0.2em] text-[#1B2017] font-bold mb-4">
-              Hair Types
+              Hair Collections
             </h4>
             <ul className="space-y-2.5 text-xs font-light">
               <li>
-                <a href="#catalog-section" className="hover:text-[#95B373] transition-colors">
-                  Wave Human Hair
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { donor: 'all' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#1B2017] font-semibold"
+                >
+                  All Collections (7 Textures)
+                </button>
               </li>
               <li>
-                <a href="#catalog-section" className="hover:text-[#95B373] transition-colors">
-                  Pixie Curl Human Hair
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { donor: 'Double Donor' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#2E3C25]"
+                >
+                  Double Donors (Brazil · 85–90%)
+                </button>
               </li>
               <li>
-                <a href="#catalog-section" className="hover:text-[#95B373] transition-colors">
-                  Fumi Curl Human Hair
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { donor: 'Super Double Donor' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#2E3C25]"
+                >
+                  Super Double Donors (Vietnam · 100%)
+                </button>
               </li>
               <li>
-                <a href="#catalog-section" className="hover:text-[#95B373] transition-colors">
-                  Deep Frizz Human Hair
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { texture: 'Wave' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Wave Brazilian Hair
+                </button>
               </li>
               <li>
-                <a href="#catalog-section" className="hover:text-[#95B373] transition-colors">
-                  Burmese Human Hair
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { texture: 'Deep Frizz' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Deep Frizz Brazilian Hair
+                </button>
               </li>
               <li>
-                <a href="#catalog-section" className="hover:text-[#95B373] transition-colors">
-                  Ocean Wave Human Hair
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { texture: 'Ocean Wave' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Ocean Wave Vietnamese Hair
+                </button>
               </li>
               <li>
-                <a href="#raw-hair-section" className="hover:text-[#1B2017] transition-colors text-[#95B373] font-medium">
-                  Raw Hair Blondes
-                </a>
+                <button
+                  onClick={() => navigateToPage('collections', { texture: 'Burmese' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Burmese Brazilian Hair
+                </button>
               </li>
             </ul>
           </div>
 
-          {/* Customer Help & Support */}
+          {/* Quick Links: Our Stores */}
+          <div>
+            <h4 className="text-xs uppercase tracking-[0.2em] text-[#1B2017] font-bold mb-4">
+              Our Stores
+            </h4>
+            <ul className="space-y-2.5 text-xs font-light">
+              <li>
+                <button
+                  onClick={() => navigateToPage('stores')}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#1B2017] font-semibold flex items-center gap-1.5"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#95B373]" />
+                  <span>All Boutiques & Ateliers</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigateToPage('stores', { storeId: 'bole-flagship' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Bole Flagship (Addis Ababa)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigateToPage('stores', { storeId: 'kazanchis-vip' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Kazanchis VIP Fitting Suite
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigateToPage('stores', { storeId: 'dubai-showroom' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                >
+                  Dubai Luxury Showroom
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigateToPage('stores')}
+                  className="hover:text-[#1B2017] text-left transition-colors text-[#95B373] font-medium cursor-pointer"
+                >
+                  Book In-Store Appointment
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Client Care & Newsletter */}
           <div>
             <h4 className="text-xs uppercase tracking-[0.2em] text-[#1B2017] font-bold mb-4">
               Client Care & Policies
             </h4>
-            <ul className="space-y-2 text-xs font-light">
+            <ul className="space-y-2 text-xs font-light mb-6">
               <li>
                 <button
                   onClick={() => openComplianceModal('refund')}
                   className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#485341] font-medium"
                 >
                   Refund & Return Policy
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => openComplianceModal('refund')}
-                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#485341]"
-                >
-                  Order Cancellation Policy
                 </button>
               </li>
               <li>
@@ -120,22 +183,6 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => openComplianceModal('terms')}
-                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#485341]"
-                >
-                  Terms of Service
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => openComplianceModal('privacy')}
-                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#485341]"
-                >
-                  Privacy & Data Policy
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => openComplianceModal('compliance')}
                   className="hover:text-[#95B373] text-left transition-colors cursor-pointer text-[#95B373] font-semibold flex items-center gap-1"
                 >
@@ -144,17 +191,10 @@ export const Footer: React.FC = () => {
                 </button>
               </li>
             </ul>
-          </div>
 
-          {/* Newsletter sign-up */}
-          <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-[#1B2017] font-bold mb-4">
+            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#1B2017] font-bold mb-2">
               Get Discounts
-            </h4>
-            <p className="text-xs text-[#5D6756] font-light mb-3">
-              Subscribe to get secret sales and discount coupon codes directly to your inbox.
-            </p>
-
+            </h5>
             <form onSubmit={handleSubscribe} className="space-y-2">
               <div className="relative">
                 <input
@@ -162,17 +202,17 @@ export const Footer: React.FC = () => {
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Your email address"
-                  className="w-full bg-white border border-[#DDD5C7] text-[#1B2017] text-xs px-3.5 py-2.5 rounded-xs focus:outline-none focus:border-[#95B373] placeholder-[#888888] shadow-xs"
+                  className="w-full bg-white border border-[#DDD5C7] text-[#1B2017] text-xs px-3 py-2 rounded-xs focus:outline-none focus:border-[#95B373] placeholder-[#888888] shadow-xs"
                 />
                 <button
                   type="submit"
-                  className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-[#95B373] hover:bg-[#82A260] text-white text-xs uppercase font-bold rounded-xs transition-colors shadow-xs cursor-pointer"
+                  className="absolute right-1 top-1 bottom-1 px-2.5 bg-[#95B373] hover:bg-[#82A260] text-white text-xs uppercase font-bold rounded-xs transition-colors shadow-xs cursor-pointer"
                 >
                   {subscribed ? <Check className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
                 </button>
               </div>
               {subscribed && (
-                <p className="text-[11px] text-[#2C401D] font-bold">Thank you for subscribing!</p>
+                <p className="text-[10px] text-[#2C401D] font-bold">Thank you for subscribing!</p>
               )}
             </form>
           </div>
@@ -181,9 +221,9 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar: Secure Payment Gateways & Card Network Compliance */}
         <div className="pt-8 flex flex-col lg:flex-row items-center justify-between gap-4 text-xs font-light">
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-[#6B7565] text-[11px]">
-            <span>© {new Date().getFullYear()} LIYU Human Hair Studio LLC. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} LIYU Human Hair Studio. All rights reserved.</span>
             <span className="hidden sm:inline">•</span>
-            <span>100% Real Human Hair • Sold as 1 Bundle</span>
+            <span>100% Real Human Hair • 1 Piece Price Guaranteed</span>
             <span className="hidden sm:inline">•</span>
             <div className="flex items-center gap-3">
               <button

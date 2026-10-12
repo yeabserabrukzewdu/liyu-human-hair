@@ -1,10 +1,12 @@
 import React from 'react';
-import { StoreProvider } from './context/StoreContext';
+import { StoreProvider, useStore } from './context/StoreContext';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProductGrid } from './components/ProductGrid';
 import { RawHairSpotlight } from './components/RawHairSpotlight';
 import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
+import { HairCollectionsPage } from './pages/HairCollectionsPage';
+import { OurStoresPage } from './pages/OurStoresPage';
 import { ProductModal } from './components/ProductModal';
 import { SearchModal } from './components/SearchModal';
 import { CartDrawer } from './components/CartDrawer';
@@ -18,14 +20,32 @@ import { Footer } from './components/Footer';
 import { ComplianceModal } from './components/ComplianceModal';
 
 const AppContent: React.FC = () => {
+  const { currentPage, navigateToPage } = useStore();
+
   const scrollToCatalog = () => {
-    const el = document.getElementById('catalog-section');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (currentPage !== 'home') {
+      navigateToPage('home');
+      setTimeout(() => {
+        const el = document.getElementById('catalog-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById('catalog-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const handleNavigateSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (currentPage !== 'home') {
+      navigateToPage('home');
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -35,17 +55,28 @@ const AppContent: React.FC = () => {
 
       {/* Main Body */}
       <main className="flex-1">
-        {/* Editorial Hero */}
-        <Hero onExploreClick={scrollToCatalog} />
+        {/* HOMEPAGE: Intact and untouched with all original components and styling */}
+        {currentPage === 'home' && (
+          <>
+            {/* Editorial Hero */}
+            <Hero onExploreClick={scrollToCatalog} />
 
-        {/* Catalog Grid with Textures, Colors, Lengths, and Price Filters */}
-        <ProductGrid />
+            {/* Catalog Grid with Textures, Colors, Lengths, and Price Filters */}
+            <ProductGrid />
 
-        {/* Double Donors & Super Double Donors Fullness Guide */}
-        <RawHairSpotlight />
+            {/* Double Donors & Super Double Donors Fullness Guide */}
+            <RawHairSpotlight />
 
-        {/* Personalized Recommendations Based on Browsing History */}
-        <PersonalizedRecommendations />
+            {/* Personalized Recommendations Based on Browsing History */}
+            <PersonalizedRecommendations />
+          </>
+        )}
+
+        {/* SEPARATE PAGE: Hair Collections */}
+        {currentPage === 'collections' && <HairCollectionsPage />}
+
+        {/* SEPARATE PAGE: Our Stores */}
+        {currentPage === 'stores' && <OurStoresPage />}
       </main>
 
       {/* Luxury Monochromatic Footer */}
