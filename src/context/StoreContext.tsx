@@ -167,9 +167,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [wishlist, setWishlist] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.WISHLIST);
-      return saved ? JSON.parse(saved) : ['liyu-raw-hair-blondes', 'liyu-ocean-wave'];
+      return saved ? JSON.parse(saved) : ['liyu-raw-hair', 'liyu-ocean-wave'];
     } catch {
-      return ['liyu-raw-hair-blondes', 'liyu-ocean-wave'];
+      return ['liyu-raw-hair', 'liyu-ocean-wave'];
     }
   });
 

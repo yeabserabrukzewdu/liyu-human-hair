@@ -349,19 +349,17 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Ash Blonde', 'Mushroom Blonde', 'Blonde'],
     availableLengths: [20],
     images: [
-      'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=1200&q=85',
+      '/7.png',
     ],
     colorImages: {
-      'Ash Blonde': 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=85',
-      'Mushroom Blonde': 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85',
-      Blonde: 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=1200&q=85',
+      'Ash Blonde': '/7.png',
+      'Mushroom Blonde': '/8.png',
+      Blonde: '/9.png',
     },
     colorThumbnails: {
-      'Ash Blonde': 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=200&q=80',
-      'Mushroom Blonde': 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=200&q=80',
-      Blonde: 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=200&q=80',
+      'Ash Blonde': '/7.png',
+      'Mushroom Blonde': '/8.png',
+      Blonde: '/9.png',
     },
     features: [
       '100% Human Hair — 1 Piece Price',
@@ -439,19 +437,19 @@ export const COLOR_SWATCHES: Record<string, { bg: string; border: string; name: 
     bg: '#cfc9bd',
     border: '#9e9689',
     name: 'Ash Blonde',
-    thumbnail: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/7.png',
   },
   'Mushroom Blonde': {
     bg: '#b7aba0',
     border: '#8c7e72',
     name: 'Mushroom Blonde',
-    thumbnail: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/7.png',
   },
   Blonde: {
     bg: '#ebd49c',
     border: '#d4af37',
     name: 'Blonde',
-    thumbnail: 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/7.png',
   },
 };
 

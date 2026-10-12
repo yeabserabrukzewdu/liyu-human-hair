@@ -202,7 +202,7 @@ export const RawHairSpotlight: React.FC = () => {
                     <strong className="text-[#1B2017] font-semibold block text-sm">
                       Signature Hair Textures
                     </strong>
-                    Includes our iconic <strong>Pixie</strong>, <strong>Fumi</strong>, and <strong>Ocean Wave</strong> collections.
+                    Includes our iconic <strong>Pixie</strong>, <strong>Fumi</strong>, <strong>Ocean Wave</strong>, and <strong>Raw Human Hair</strong> collections.
                   </div>
                 </div>
               </div>
@@ -218,8 +218,8 @@ export const RawHairSpotlight: React.FC = () => {
             </div>
 
             {/* Right Product Grid */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-5">
-              {superDoubleDonorProducts.slice(0, 3).map((prod) => (
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+              {superDoubleDonorProducts.map((prod) => (
                 <div
                   key={prod.id}
                   onClick={() => openProductModal(prod)}
