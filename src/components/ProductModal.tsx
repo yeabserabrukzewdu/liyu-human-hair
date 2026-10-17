@@ -15,10 +15,11 @@ import {
   Package,
   Star,
   RefreshCw,
+  MessageCircle,
 } from 'lucide-react';
 import { Product, ProductVariant, HairColor } from '../types';
 import { useStore } from '../context/StoreContext';
-import { COLOR_SWATCHES, PRODUCTS } from '../data/products';
+import { COLOR_SWATCHES } from '../data/products';
 import { Logo } from './Logo';
 
 interface ProductModalContentProps {
@@ -27,6 +28,7 @@ interface ProductModalContentProps {
 
 const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) => {
   const {
+    products,
     closeProductModal,
     openProductModal,
     addToCart,
@@ -35,11 +37,12 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
     cartCount,
     setIsCartOpen,
     setIsCheckoutOpen,
+    toggleWhatsApp,
   } = useStore();
 
   // Active selections
-  const [selectedColor, setSelectedColor] = useState<HairColor>(product.availableColors[0]);
-  const [selectedLength, setSelectedLength] = useState<number>(product.availableLengths[0]);
+  const [selectedColor, setSelectedColor] = useState<HairColor | string>(product.availableColors[0] || 'Black');
+  const [selectedLength, setSelectedLength] = useState<number>(product.availableLengths[0] || 20);
   const [quantity, setQuantity] = useState<number>(1);
   const [mainImage, setMainImage] = useState<string>(product.images[0]);
   const [activeTab, setActiveTab] = useState<'description' | 'options' | 'care' | 'shipping'>('description');
@@ -49,13 +52,13 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
   useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      const urlColor = params.get('color') as HairColor | null;
+      const urlColor = params.get('color') as (HairColor | string) | null;
       const urlLength = params.get('length') ? parseInt(params.get('length')!, 10) : null;
 
       const initialColor =
         urlColor && product.availableColors.includes(urlColor)
           ? urlColor
-          : product.availableColors[0];
+          : product.availableColors[0] || 'Black';
 
       const validLengths = product.variants
         .filter((v) => v.color === initialColor)
@@ -64,7 +67,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
       const initialLength =
         urlLength && validLengths.includes(urlLength)
           ? urlLength
-          : validLengths[0] || product.availableLengths[0];
+          : validLengths[0] || product.availableLengths[0] || 20;
 
       setSelectedColor(initialColor);
       setSelectedLength(initialLength);
@@ -144,7 +147,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
   ).sort((a, b) => a - b);
 
   // Color change handler (Rule 6: automatically change main image to the color image & filter lengths)
-  const handleColorChange = (newColor: HairColor) => {
+  const handleColorChange = (newColor: HairColor | string) => {
     setSelectedColor(newColor);
 
     // Switch image to selected color
@@ -185,7 +188,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
   };
 
   // Other products for related products section
-  const otherProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 3);
+  const otherProducts = products.filter((p) => p.id !== product.id).slice(0, 3);
 
   return (
     <div
@@ -301,48 +304,38 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
               </div>
             </div>
 
-            {/* Gallery Thumbnails List */}
-            <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
-              {/* Color Specific Image Thumbnail */}
-              {product.colorImages && product.colorImages[selectedColor] && (
-                <button
-                  type="button"
-                  onClick={() => setMainImage(product.colorImages![selectedColor])}
-                  className={`relative w-20 h-24 rounded-xs overflow-hidden border-2 transition-all cursor-pointer shrink-0 bg-white ${
-                    mainImage === product.colorImages![selectedColor]
-                      ? 'border-[#95B373] ring-1 ring-[#95B373]'
-                      : 'border-[#DDD5C7] opacity-75 hover:opacity-100'
-                  }`}
-                  title={`${selectedColor} photo`}
-                >
-                  <img
-                    src={product.colorImages[selectedColor]}
-                    alt={`${product.name} - ${selectedColor}`}
-                    className="w-full h-full object-cover"
-                  />
-                  <span className="absolute bottom-0 inset-x-0 bg-black/70 text-white text-[9px] text-center py-0.5 truncate font-medium">
-                    {selectedColor}
-                  </span>
-                </button>
-              )}
-
-              {/* General angle images */}
-              {product.images.map((img, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => setMainImage(img)}
-                  className={`relative w-20 h-24 rounded-xs overflow-hidden border-2 transition-all cursor-pointer shrink-0 bg-white ${
-                    mainImage === img
-                      ? 'border-[#95B373] ring-1 ring-[#95B373]'
-                      : 'border-[#DDD5C7] opacity-75 hover:opacity-100'
-                  }`}
-                  title={`View angle ${idx + 1}`}
-                >
-                  <img src={img} alt={`View angle ${idx + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+            {/* Color Option Thumbnails List (for multi-color products) */}
+            {product.availableColors.length > 1 && product.colorImages && (
+              <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
+                {product.availableColors.map((color) => {
+                  const imgUrl = product.colorImages?.[color];
+                  if (!imgUrl) return null;
+                  const isCurrent = selectedColor === color;
+                  return (
+                    <button
+                      key={color}
+                      type="button"
+                      onClick={() => handleColorChange(color)}
+                      className={`relative w-20 h-24 rounded-xs overflow-hidden border-2 transition-all cursor-pointer shrink-0 bg-white ${
+                        isCurrent
+                          ? 'border-[#95B373] ring-1 ring-[#95B373]'
+                          : 'border-[#DDD5C7] opacity-75 hover:opacity-100'
+                      }`}
+                      title={`${color} color option`}
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`${product.name} - ${color}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute bottom-0 inset-x-0 bg-black/70 text-white text-[9px] text-center py-0.5 truncate font-medium">
+                        {color}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Simple Quality Guarantees Bar */}
             <div className="bg-white p-4 border border-[#DDD5C7] rounded-xs grid grid-cols-2 gap-3 text-xs text-[#55634E] shadow-2xs">
@@ -655,39 +648,68 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({ product }) =>
             </div>
 
             {/* ==================================================== */}
-            {/* ACTION BUTTONS: Add to Bag + Buy Now                 */}
+            {/* ACTION BUTTONS: Add to Bag + Buy Now / Out of Stock  */}
             {/* ==================================================== */}
             <div className="space-y-3 pt-2">
-              <button
-                id="modal-add-to-bag-btn"
-                type="button"
-                onClick={handleAddToCart}
-                className="w-full py-4 bg-[#95B373] text-white hover:bg-[#82A260] text-sm uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-md shadow-[#95B373]/20 rounded-xs"
-              >
-                {addedAnimation ? (
-                  <>
-                    <Check className="w-5 h-5 text-white" />
-                    <span>Added {quantity} {quantity === 1 ? 'Bundle' : 'Bundles'} to Your Bag!</span>
-                  </>
-                ) : (
-                  <>
-                    <ShoppingBag className="w-5 h-5" />
-                    <span>
-                      Add to Bag — ${totalPrice} USD ({quantity} {quantity === 1 ? 'Bundle' : 'Bundles'})
+              {product.inStock === false ? (
+                <div className="space-y-3">
+                  <div className="p-4 bg-[#F2ECE0] border border-[#DDD5C7] rounded-xs text-center space-y-1">
+                    <span className="text-xs uppercase font-bold tracking-widest text-[#1B2017] block">
+                      Currently Out of Stock
                     </span>
-                  </>
-                )}
-              </button>
+                    <p className="text-xs text-[#5D6755]">
+                      This bundle texture is currently sold out or reserved for private atelier fittings. Contact our VIP concierge via WhatsApp to check upcoming batch restock or reserve pieces.
+                    </p>
+                  </div>
+                  <button
+                    id="modal-whatsapp-inquire-btn"
+                    type="button"
+                    onClick={toggleWhatsApp}
+                    className="w-full py-4 bg-[#25D366] text-white hover:bg-[#1EBE5D] text-xs uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-md rounded-xs"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Inquire Restock / Pre-Order on WhatsApp</span>
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <button
+                    id="modal-add-to-bag-btn"
+                    type="button"
+                    onClick={handleAddToCart}
+                    className="w-full py-4 bg-[#95B373] text-white hover:bg-[#82A260] text-sm uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-md shadow-[#95B373]/20 rounded-xs"
+                  >
+                    {addedAnimation ? (
+                      <>
+                        <Check className="w-5 h-5 text-white" />
+                        <span>Added {quantity} {quantity === 1 ? 'Bundle' : 'Bundles'} to Your Bag!</span>
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingBag className="w-5 h-5" />
+                        <span>
+                          Add to Bag — ${totalPrice} USD ({quantity} {quantity === 1 ? 'Bundle' : 'Bundles'})
+                        </span>
+                      </>
+                    )}
+                  </button>
 
-              <button
-                id="modal-instant-checkout-btn"
-                type="button"
-                onClick={handleBuyNow}
-                className="w-full py-3.5 bg-white hover:bg-[#F2ECE0] text-[#1B2017] border-2 border-[#DDD5C7] hover:border-[#95B373] text-sm uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2 cursor-pointer rounded-xs shadow-xs"
-              >
-                <span>Buy Now — Go to Checkout</span>
-                <ArrowRight className="w-4 h-4 text-[#95B373]" />
-              </button>
+                  <button
+                    id="modal-instant-checkout-btn"
+                    type="button"
+                    onClick={handleBuyNow}
+                    className="w-full py-3.5 bg-white hover:bg-[#F2ECE0] text-[#1B2017] border-2 border-[#DDD5C7] hover:border-[#95B373] text-sm uppercase tracking-[0.2em] font-bold transition-all flex flex-col sm:flex-row items-center justify-center gap-1.5 cursor-pointer rounded-xs shadow-xs"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span>Order Now — Reserve Bundles</span>
+                      <ArrowRight className="w-4 h-4 text-[#95B373]" />
+                    </div>
+                    <span className="text-[10px] text-[#8C6D1F] font-mono tracking-normal font-semibold normal-case">
+                      (Stripe Card Coming Soon · Pay Later)
+                    </span>
+                  </button>
+                </>
+              )}
             </div>
 
             {/* ==================================================== */}

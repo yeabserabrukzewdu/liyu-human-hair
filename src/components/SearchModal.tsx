@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, ArrowRight, Tag, SlidersHorizontal } from 'lucide-react';
-import { PRODUCTS } from '../data/products';
 import { Product } from '../types';
 import { useStore } from '../context/StoreContext';
 import { Logo } from './Logo';
 
 export const SearchModal: React.FC = () => {
-  const { isSearchOpen, setIsSearchOpen, openProductModal } = useStore();
+  const { isSearchOpen, setIsSearchOpen, openProductModal, products } = useStore();
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -56,7 +55,7 @@ export const SearchModal: React.FC = () => {
     : [];
 
   const matchedProducts: Product[] = query.trim()
-    ? PRODUCTS.filter((product) => {
+    ? products.filter((product) => {
         const q = query.toLowerCase();
         const nameMatch = product.name.toLowerCase().includes(q);
         const categoryMatch = product.category.toLowerCase().includes(q);
@@ -213,7 +212,7 @@ export const SearchModal: React.FC = () => {
                   All 7 Notebook Catalog Textures
                 </span>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {PRODUCTS.map((prod) => (
+                  {products.map((prod) => (
                     <button
                       key={prod.id}
                       onClick={() => handleSelectProduct(prod)}

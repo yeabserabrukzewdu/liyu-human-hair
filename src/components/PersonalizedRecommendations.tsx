@@ -2,7 +2,6 @@ import React from 'react';
 import { History, ArrowRight, Heart } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { ProductCard } from './ProductCard';
-import { PRODUCTS } from '../data/products';
 
 export const PersonalizedRecommendations: React.FC = () => {
   const {
@@ -10,13 +9,14 @@ export const PersonalizedRecommendations: React.FC = () => {
     getPersonalizedRecommendations,
     clearBrowsingHistory,
     openProductModal,
+    products,
   } = useStore();
 
   const recommendedProducts = getPersonalizedRecommendations();
 
   // If user has viewed items, get the last viewed product name
   const lastViewedId = browsingHistory[0]?.productId;
-  const lastViewedProduct = PRODUCTS.find((p) => p.id === lastViewedId);
+  const lastViewedProduct = products.find((p) => p.id === lastViewedId);
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E5DFD2]">
@@ -80,8 +80,8 @@ export const PersonalizedRecommendations: React.FC = () => {
 
         <button
           onClick={() => {
-            const oceanWave = PRODUCTS.find((p) => p.id === 'liyu-ocean-wave') || PRODUCTS[0];
-            openProductModal(oceanWave);
+            const oceanWave = products.find((p) => p.id === 'liyu-ocean-wave') || products[0];
+            if (oceanWave) openProductModal(oceanWave);
           }}
           className="whitespace-nowrap px-6 py-3.5 bg-[#95B373] text-white hover:bg-[#82A260] text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors cursor-pointer shadow-md shadow-[#95B373]/20 rounded-xs"
         >

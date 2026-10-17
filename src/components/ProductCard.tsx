@@ -45,7 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       {/* Product Image Frame */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#F4EFE6]">
         <img
-          src={isHovered && product.images[1] ? product.images[1] : product.images[0]}
+          src={product.images[0]}
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -53,7 +53,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-          {product.isFlashSale && (
+          {product.inStock === false && (
+            <span className="px-2.5 py-0.5 bg-[#1B2017] text-white font-bold text-[9px] uppercase tracking-widest rounded-xs shadow-xs">
+              Out of Stock
+            </span>
+          )}
+          {product.isFlashSale && product.inStock !== false && (
             <span className="px-2.5 py-0.5 bg-[#95B373] text-white font-bold text-[9px] uppercase tracking-widest rounded-xs shadow-xs flex items-center gap-1">
               <Tag className="w-2.5 h-2.5" />
               Flash -{product.discountPercentage || 15}%
@@ -91,22 +96,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Quick View overlay banner on desktop */}
         <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden sm:flex items-center justify-between gap-2">
-          <button
-            onClick={handleQuickAdd}
-            className="flex-1 py-2.5 px-3 bg-[#95B373] hover:bg-[#82A260] text-white text-[10px] uppercase font-bold tracking-[0.2em] transition-colors flex items-center justify-center gap-1.5 shadow-md rounded-xs"
-          >
-            {quickAdded ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-white" />
-                <span>Added to Bag</span>
-              </>
-            ) : (
-              <>
-                <Plus className="w-3.5 h-3.5" />
-                <span>Quick Add 1 Piece ({defaultVariant.length}")</span>
-              </>
-            )}
-          </button>
+          {product.inStock === false ? (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                openProductModal(product);
+              }}
+              className="flex-1 py-2.5 px-3 bg-[#444E3D] hover:bg-[#2C3526] text-white text-[10px] uppercase font-bold tracking-[0.2em] transition-colors flex items-center justify-center gap-1.5 shadow-md rounded-xs"
+            >
+              <span>Out of Stock · View</span>
+            </button>
+          ) : (
+            <button
+              onClick={handleQuickAdd}
+              className="flex-1 py-2.5 px-3 bg-[#95B373] hover:bg-[#82A260] text-white text-[10px] uppercase font-bold tracking-[0.2em] transition-colors flex items-center justify-center gap-1.5 shadow-md rounded-xs"
+            >
+              {quickAdded ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-white" />
+                  <span>Added to Bag</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Quick Add 1 Piece ({defaultVariant?.length || 20}")</span>
+                </>
+              )}
+            </button>
+          )}
           <button
             onClick={(e) => {
               e.stopPropagation();

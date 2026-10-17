@@ -426,6 +426,18 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
             >
               Policies & Care
             </button>
+
+            {/* 6. ATELIER ADMIN PORTAL */}
+            <button
+              onClick={() => navigateToPage('admin')}
+              className={`hover:text-[#1B2017] transition-colors cursor-pointer py-2 flex items-center gap-1.5 ${
+                currentPage === 'admin' ? 'text-[#1B2017] font-bold border-b-2 border-[#1B2017]' : 'text-[#485341]'
+              }`}
+              title="Atelier Admin Portal"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#95B373]" />
+              <span>Admin</span>
+            </button>
           </nav>
 
           {/* RIGHT: Action Icons */}
@@ -658,6 +670,23 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
             >
               <span>Client Care & Policies</span>
               <span className="text-[10px] text-[#95B373] font-semibold uppercase tracking-wider">Compliance</span>
+            </button>
+
+            {/* Atelier Admin Portal */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigateToPage('admin');
+              }}
+              className="text-left hover:text-[#1B2017] py-2 font-bold cursor-pointer flex items-center justify-between text-[#1B2017] border-t border-[#E8E2D5]"
+            >
+              <span className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#95B373]" />
+                <span>Atelier Admin Portal</span>
+              </span>
+              <span className="text-[9px] text-white bg-[#1B2017] px-2 py-0.5 rounded font-mono uppercase tracking-wider">
+                Manage
+              </span>
             </button>
 
             <div className="pt-4 border-t border-[#E8E2D5] flex items-center justify-between text-xs text-[#737C6D] font-sans normal-case tracking-normal">

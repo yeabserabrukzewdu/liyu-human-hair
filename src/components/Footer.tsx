@@ -250,6 +250,14 @@ export const Footer: React.FC = () => {
               >
                 Compliance
               </button>
+              <button
+                onClick={() => navigateToPage('admin')}
+                className="hover:text-[#1B2017] transition-colors cursor-pointer text-[#1B2017] font-semibold flex items-center gap-1"
+                title="Atelier Admin Portal"
+              >
+                <ShieldCheck className="w-3 h-3 text-[#95B373]" />
+                <span>Admin</span>
+              </button>
             </div>
           </div>
 

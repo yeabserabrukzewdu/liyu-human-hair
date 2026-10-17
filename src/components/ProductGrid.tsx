@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { SlidersHorizontal, X, RotateCcw, ChevronDown, Check } from 'lucide-react';
-import { Product, HairTexture, HairColor } from '../types';
-import { PRODUCTS, COLOR_SWATCHES } from '../data/products';
+import { Product, HairColor } from '../types';
+import { COLOR_SWATCHES } from '../data/products';
+import { useStore } from '../context/StoreContext';
 import { ProductCard } from './ProductCard';
 
 export const ProductGrid: React.FC = () => {
+  const { products, productTypes } = useStore();
   const [selectedDonor, setSelectedDonor] = useState<'all' | 'Double Donor' | 'Super Double Donor'>('all');
   const [selectedTexture, setSelectedTexture] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
@@ -13,16 +15,10 @@ export const ProductGrid: React.FC = () => {
   const [sortBy, setSortBy] = useState<'featured' | 'price_low' | 'price_high' | 'rating'>('featured');
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
 
-  const textures: { label: string; value: string }[] = [
+  const textures = useMemo(() => [
     { label: 'All Textures', value: 'all' },
-    { label: 'Wave', value: 'Wave' },
-    { label: 'Pixie', value: 'Pixie' },
-    { label: 'Fumi', value: 'Fumi' },
-    { label: 'Deep Frizz', value: 'Deep Frizz' },
-    { label: 'Burmese', value: 'Burmese' },
-    { label: 'Ocean Wave', value: 'Ocean Wave' },
-    { label: 'Raw Hair', value: 'Raw Hair' },
-  ];
+    ...productTypes.map((type) => ({ label: type, value: type })),
+  ], [productTypes]);
 
   const colors: HairColor[] = [
     'Black',
@@ -55,7 +51,7 @@ export const ProductGrid: React.FC = () => {
   };
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // Donor match
       if (selectedDonor !== 'all' && product.donorCategory !== selectedDonor) {
         return false;
@@ -85,7 +81,7 @@ export const ProductGrid: React.FC = () => {
       // Default: featured (preserve catalog order)
       return a.catalogNumber - b.catalogNumber;
     });
-  }, [selectedDonor, selectedTexture, selectedColor, selectedLength, priceMax, sortBy]);
+  }, [products, selectedDonor, selectedTexture, selectedColor, selectedLength, priceMax, sortBy]);
 
   return (
     <section id="catalog-section" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -153,7 +149,7 @@ export const ProductGrid: React.FC = () => {
               : 'bg-white text-[#4A5543] border-[#DDD5C7] hover:border-[#1B2017]'
           }`}
         >
-          All ({PRODUCTS.length})
+          All ({products.length})
         </button>
         <button
           onClick={() => setSelectedDonor('Double Donor')}

@@ -37,12 +37,12 @@ export interface Product {
   slug: string;
   name: string;
   catalogNumber: number; // 1 to 7 from user's specification
-  category: HairTexture;
+  category: HairTexture | string;
   shortDescription: string;
   description: string;
   basePrice: number;
   maxPrice: number;
-  availableColors: HairColor[];
+  availableColors: (HairColor | string)[];
   availableLengths: number[];
   variants: ProductVariant[];
   images: string[];
@@ -62,6 +62,37 @@ export interface Product {
   isNewArrival?: boolean;
   isFlashSale?: boolean;
   discountPercentage?: number;
+  inStock?: boolean;
+}
+
+export type RequestType = 'order' | 'consultation' | 'custom_inquiry';
+export type RequestStatus = 'pending' | 'confirmed' | 'processing' | 'completed' | 'cancelled';
+
+export interface CustomerRequest {
+  id: string;
+  type: RequestType;
+  customerName: string;
+  customerEmail?: string;
+  customerPhone: string;
+  title: string;
+  details: string;
+  status: RequestStatus;
+  createdAt: string;
+  updatedAt?: string;
+  totalAmount?: number;
+  itemsSummary?: string;
+  appointmentDate?: string;
+  appointmentTime?: string;
+  storeLocation?: string;
+  orderId?: string;
+  adminNotes?: string;
+}
+
+export interface WhatsAppConfig {
+  phoneNumber: string;
+  defaultMessage: string;
+  showToggle: boolean;
+  businessHours: string;
 }
 
 export interface CartItem {
@@ -97,6 +128,8 @@ export interface Order {
   estimatedDelivery: string;
   customerName: string;
   customerEmail: string;
+  customerPhone?: string;
+  customerNotes?: string;
   shippingAddress: {
     street: string;
     city: string;
@@ -117,12 +150,35 @@ export interface Order {
   discount: number;
   shippingFee: number;
   total: number;
-  paymentMethod: 'stripe' | 'paypal' | 'apple_pay';
-  paymentStatus: 'paid' | 'pending';
+  paymentMethod: 'stripe' | 'paypal' | 'apple_pay' | 'order_reservation';
+  paymentStatus: 'paid' | 'pending' | 'reservation_confirmed';
   currentStage: OrderProgressStage;
   progressPercent: number;
   checkpoints: OrderCheckpoint[];
   lastUpdated: string;
+}
+
+export interface EmailRecord {
+  id: string;
+  recipientType: 'buyer' | 'owner';
+  recipientEmail: string;
+  recipientName: string;
+  senderEmail: string;
+  subject: string;
+  htmlBody: string;
+  textBody: string;
+  orderId?: string;
+  requestId?: string;
+  sentAt: string;
+  status: 'sent' | 'delivered';
+  customerContact?: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+  };
+  itemsSummary?: string;
+  totalAmount?: number;
 }
 
 export interface NotificationItem {

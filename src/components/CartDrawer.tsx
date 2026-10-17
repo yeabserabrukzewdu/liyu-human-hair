@@ -276,23 +276,33 @@ const CartDrawerContent: React.FC = () => {
               </div>
             </div>
 
-            {/* Checkout Button */}
+            {/* Coming Soon Notice in Cart */}
+            <div className="p-2.5 bg-[#FFF9E6] border border-[#FFE082] rounded-xs text-[11px] text-[#7A5500] leading-snug">
+              <strong>Stripe Payments Coming Soon:</strong> You can place your order reservation now with zero upfront payment today.
+            </div>
+
+            {/* Checkout / Order Now Button */}
             <button
               id="drawer-checkout-btn"
               onClick={handleProceedToCheckout}
-              className="w-full py-4 bg-[#95B373] hover:bg-[#82A260] text-white font-bold text-xs uppercase tracking-[0.25em] flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md shadow-[#95B373]/20 rounded-xs"
+              className="w-full py-4 bg-[#95B373] hover:bg-[#82A260] text-white font-bold text-xs uppercase tracking-[0.2em] flex flex-col items-center justify-center gap-0.5 transition-all cursor-pointer shadow-md shadow-[#95B373]/20 rounded-xs"
             >
-              <span>Secure Checkout</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2">
+                <span>Order Now — Reserve Bundles</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+              <span className="text-[10px] font-normal tracking-normal text-white/85">
+                Stripe Card Coming Soon · Pay Later
+              </span>
             </button>
 
             {/* Payment Icons Preview */}
-            <div className="flex items-center justify-center gap-3 text-[10px] text-[#6A7563] uppercase tracking-wider font-medium">
-              <span>Stripe 256-bit</span>
+            <div className="flex items-center justify-center gap-2 text-[10px] text-[#6A7563] uppercase tracking-wider font-medium">
+              <span>Stripe Card (Coming Soon)</span>
               <span>•</span>
-              <span>PayPal Express</span>
+              <span>Email Confirmation</span>
               <span>•</span>
-              <span>Apple Pay</span>
+              <span>Zero Upfront</span>
             </div>
           </div>
         )}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { X, Heart, Trash2, ArrowRight, Share2, Check, ShoppingBag } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
-import { PRODUCTS } from '../data/products';
 import { Logo } from './Logo';
 
 const WishlistDrawerContent: React.FC = () => {
@@ -11,11 +10,12 @@ const WishlistDrawerContent: React.FC = () => {
     toggleWishlist,
     openProductModal,
     addToCart,
+    products,
   } = useStore();
 
   const [copiedLink, setCopiedLink] = useState(false);
 
-  const wishlistedProducts = PRODUCTS.filter((p) => wishlist.includes(p.id));
+  const wishlistedProducts = products.filter((p) => wishlist.includes(p.id));
 
   const handleShareWishlist = () => {
     navigator.clipboard.writeText(window.location.href);

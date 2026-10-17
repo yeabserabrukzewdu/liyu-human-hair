@@ -7,6 +7,7 @@ import { RawHairSpotlight } from './components/RawHairSpotlight';
 import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
 import { HairCollectionsPage } from './pages/HairCollectionsPage';
 import { OurStoresPage } from './pages/OurStoresPage';
+import { AdminPage } from './pages/AdminPage';
 import { ProductModal } from './components/ProductModal';
 import { SearchModal } from './components/SearchModal';
 import { CartDrawer } from './components/CartDrawer';
@@ -18,6 +19,7 @@ import { MobileNavBar } from './components/MobileNavBar';
 import { ToastAlert } from './components/ToastAlert';
 import { Footer } from './components/Footer';
 import { ComplianceModal } from './components/ComplianceModal';
+import { WhatsAppToggle } from './components/WhatsAppToggle';
 
 const AppContent: React.FC = () => {
   const { currentPage, navigateToPage } = useStore();
@@ -77,6 +79,9 @@ const AppContent: React.FC = () => {
 
         {/* SEPARATE PAGE: Our Stores */}
         {currentPage === 'stores' && <OurStoresPage />}
+
+        {/* SEPARATE PAGE: Admin Management Portal */}
+        {currentPage === 'admin' && <AdminPage />}
       </main>
 
       {/* Luxury Monochromatic Footer */}
@@ -84,6 +89,9 @@ const AppContent: React.FC = () => {
 
       {/* Mobile Sticky Bottom Navigation */}
       <MobileNavBar />
+
+      {/* WhatsApp Concierge Floating Toggle Button */}
+      <WhatsAppToggle />
 
       {/* Modals & Slide-over Drawers */}
       <ProductModal />

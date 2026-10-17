@@ -15,13 +15,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      '/1.webp',
+      '/4.webp',
     ],
     colorImages: {
-      Black: '/1.webp',
+      Black: '/4.webp',
     },
     colorThumbnails: {
-      Black: '/1.webp',
+      Black: '/4.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -62,18 +62,16 @@ export const PRODUCTS: Product[] = [
     availableLengths: [12, 14, 16, 18, 20],
     images: [
       '/5.webp',
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
     ],
     colorImages: {
       Black: '/5.webp',
-      Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85',
-      'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
+      Piano: '/13.png',
+      'Coffee Brown': '/10.png',
     },
     colorThumbnails: {
       Black: '/5.webp',
-      Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
-      'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      Piano: '/13.png',
+      'Coffee Brown': '/10.png',
     },
     features: [
       'Vietnamese Human Hair — 1 Piece Price',
@@ -122,23 +120,21 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black', 'Coffee Brown', 'Half Coffee Brown', 'Burgundy', 'Piano'],
     availableLengths: [10, 12, 14, 16, 18, 20],
     images: [
-      '/3.webp',
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=85',
+      '/14.png',
     ],
     colorImages: {
-      Black: '/3.webp',
-      'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
-      'Half Coffee Brown': 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=85',
-      Burgundy: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=85',
-      Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85',
+      Black: '/14.png',
+      'Coffee Brown': '/10.png',
+      'Half Coffee Brown': '/11.png',
+      Burgundy: '/12.png',
+      Piano: '/13.png',
     },
     colorThumbnails: {
-      Black: '/3.webp',
-      'Coffee Brown': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-      'Half Coffee Brown': 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=200&q=80',
-      Burgundy: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=200&q=80',
-      Piano: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
+      Black: '/14.png',
+      'Coffee Brown': '/10.png',
+      'Half Coffee Brown': '/11.png',
+      Burgundy: '/12.png',
+      Piano: '/13.png',
     },
     features: [
       'Vietnamese Human Hair — 1 Piece Price',
@@ -197,13 +193,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      '/6.webp',
+      '/15.webp',
     ],
     colorImages: {
-      Black: '/6.webp',
+      Black: '/15.webp',
     },
     colorThumbnails: {
-      Black: '/6.webp',
+      Black: '/15.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -242,13 +238,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [18, 20, 22, 24, 26, 28],
     images: [
-      '/4.webp',
+      '/1.webp',
     ],
     colorImages: {
-      Black: '/4.webp',
+      Black: '/1.webp',
     },
     colorThumbnails: {
-      Black: '/4.webp',
+      Black: '/1.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -290,18 +286,16 @@ export const PRODUCTS: Product[] = [
     availableLengths: [16, 18, 20],
     images: [
       '/2.webp',
-      'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
     ],
     colorImages: {
       Black: '/2.webp',
-      'Coffee Brown': 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=1200&q=85',
-      Highlight: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
+      'Coffee Brown': '/10.png',
+      Highlight: '/2.webp',
     },
     colorThumbnails: {
       Black: '/2.webp',
-      'Coffee Brown': 'https://images.unsplash.com/photo-1522337094346-290f26a121f0?auto=format&fit=crop&w=200&q=80',
-      Highlight: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      'Coffee Brown': '/10.png',
+      Highlight: '/2.webp',
     },
     features: [
       'Vietnamese Human Hair — 1 Piece Price',
@@ -407,31 +401,31 @@ export const COLOR_SWATCHES: Record<string, { bg: string; border: string; name: 
     bg: '#3e2723',
     border: '#5d4037',
     name: 'Coffee Brown',
-    thumbnail: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/10.png',
   },
   'Half Coffee Brown': {
     bg: 'linear-gradient(135deg, #171717 50%, #5d4037 50%)',
     border: '#6d4c41',
     name: 'Half Coffee Brown',
-    thumbnail: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/11.png',
   },
   Highlight: {
     bg: 'linear-gradient(135deg, #2b1f1d 40%, #c5a059 40%, #c5a059 60%, #2b1f1d 60%)',
     border: '#bfa15f',
     name: 'Highlight',
-    thumbnail: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/2.webp',
   },
   Piano: {
     bg: 'repeating-linear-gradient(90deg, #1c1917, #1c1917 4px, #d7b575 4px, #d7b575 8px)',
     border: '#d7b575',
     name: 'Piano',
-    thumbnail: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/13.png',
   },
   Burgundy: {
     bg: '#4a0e17',
     border: '#7f1d1d',
     name: 'Burgundy',
-    thumbnail: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=200&q=80',
+    thumbnail: '/12.png',
   },
   'Ash Blonde': {
     bg: '#cfc9bd',
@@ -443,13 +437,13 @@ export const COLOR_SWATCHES: Record<string, { bg: string; border: string; name: 
     bg: '#b7aba0',
     border: '#8c7e72',
     name: 'Mushroom Blonde',
-    thumbnail: '/7.png',
+    thumbnail: '/8.png',
   },
   Blonde: {
     bg: '#ebd49c',
     border: '#d4af37',
     name: 'Blonde',
-    thumbnail: '/7.png',
+    thumbnail: '/9.png',
   },
 };
 
@@ -473,7 +467,7 @@ export const INITIAL_ORDERS: import('../types').Order[] = [
       {
         productId: 'liyu-burmese',
         productName: 'Burmese Human Hair',
-        image: '/4.webp',
+        image: '/1.webp',
         color: 'Black',
         length: 24,
         price: 92,

@@ -16,11 +16,12 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
-import { PRODUCTS } from '../data/products';
 import { Product, ProductVariant } from '../types';
 
 export const HairCollectionsPage: React.FC = () => {
   const { 
+    products,
+    productTypes,
     navigateToPage, 
     selectedCollectionDonor, 
     setSelectedCollectionDonor,
@@ -38,12 +39,12 @@ export const HairCollectionsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'catalog' | 'comparison' | 'calculator'>('catalog');
 
   // Available filters
-  const textures = ['all', 'Wave', 'Pixie', 'Fumi', 'Deep Frizz', 'Burmese', 'Ocean Wave', 'Body Wave'];
+  const textures = ['all', ...productTypes];
   const lengths = [14, 16, 18, 20, 22, 24, 26, 28, 30];
 
   // Filter products
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // Donor filter
       if (selectedCollectionDonor !== 'all') {
         if (product.donorCategory !== selectedCollectionDonor) return false;

@@ -1,9 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product, ProductVariant, CartItem, Order, NotificationItem, BrowsingHistoryItem } from '../types';
+import { Product, ProductVariant, CartItem, Order, NotificationItem, BrowsingHistoryItem, EmailRecord } from '../types';
 import { PRODUCTS, INITIAL_ORDERS } from '../data/products';
+import { generateBuyerEmail, generateOwnerAlertEmail } from '../utils/emailService';
+
+import { 
+  DEFAULT_PRODUCT_TYPES, 
+  DEFAULT_WHATSAPP_CONFIG, 
+  INITIAL_REQUESTS 
+} from '../data/adminDefaults';
+import { CustomerRequest, RequestStatus, WhatsAppConfig } from '../types';
 
 export type ComplianceTab = 'compliance' | 'terms' | 'privacy' | 'refund' | 'shipping' | 'security';
-export type AppPage = 'home' | 'collections' | 'stores';
+export type AppPage = 'home' | 'collections' | 'stores' | 'admin';
 
 interface StoreContextType {
   // Navigation & Multi-page
@@ -23,6 +31,34 @@ interface StoreContextType {
       storeId?: string;
     }
   ) => void;
+
+  // Products & Inventory Management
+  products: Product[];
+  addProduct: (productData: Omit<Product, 'id' | 'slug' | 'rating' | 'reviewCount'>) => Product;
+  updateProduct: (id: string, updates: Partial<Product>) => void;
+  deleteProduct: (id: string) => void;
+  toggleProductStock: (id: string) => void;
+  toggleProductSale: (id: string, discountPercentage?: number) => void;
+  changeProductImage: (id: string, newImageUrl: string) => void;
+  resetProductsToDefault: () => void;
+
+  // Product Types / Categories
+  productTypes: string[];
+  addProductType: (type: string) => boolean;
+  removeProductType: (type: string) => boolean;
+
+  // Customer Requests & Inquiries
+  requests: CustomerRequest[];
+  addCustomerRequest: (requestData: Omit<CustomerRequest, 'id' | 'createdAt'>) => CustomerRequest;
+  updateRequestStatus: (id: string, status: RequestStatus, adminNotes?: string) => void;
+  deleteRequest: (id: string) => void;
+
+  // WhatsApp Concierge Config & Toggle
+  whatsappConfig: WhatsAppConfig;
+  updateWhatsAppConfig: (config: Partial<WhatsAppConfig>) => void;
+  isWhatsAppOpen: boolean;
+  setIsWhatsAppOpen: (open: boolean) => void;
+  toggleWhatsApp: () => void;
 
   // Cart
   cart: CartItem[];
@@ -91,6 +127,21 @@ interface StoreContextType {
   complianceTab: ComplianceTab;
   setComplianceTab: (tab: ComplianceTab) => void;
   openComplianceModal: (tab?: ComplianceTab) => void;
+
+  // Website Owner Alert & Stripe Coming Soon Settings
+  ownerEmail: string;
+  updateOwnerEmail: (email: string) => void;
+  ownerPhone: string;
+  updateOwnerPhone: (phone: string) => void;
+  stripeComingSoon: boolean;
+  setStripeComingSoon: (val: boolean) => void;
+
+  // Sent Emails Archive & Dispatch Log
+  sentEmails: EmailRecord[];
+  sendEmailNotification: (email: Omit<EmailRecord, 'id' | 'sentAt' | 'status'>) => EmailRecord;
+  clearSentEmails: () => void;
+  lastDispatchedEmails: { buyerEmail?: EmailRecord; ownerEmail?: EmailRecord } | null;
+  setLastDispatchedEmails: (emails: { buyerEmail?: EmailRecord; ownerEmail?: EmailRecord } | null) => void;
 }
 
 const StoreContext = createContext<StoreContextType | null>(null);
@@ -103,6 +154,14 @@ const STORAGE_KEYS = {
   NOTIFICATIONS: 'liyu_notifications_v1',
   PUSH_PERM: 'liyu_push_perm_v1',
   COUPON: 'liyu_coupon_v1',
+  PRODUCTS: 'liyu_products_v4',
+  TYPES: 'liyu_product_types_v3',
+  REQUESTS: 'liyu_customer_requests_v3',
+  WHATSAPP: 'liyu_whatsapp_config_v3',
+  OWNER_EMAIL: 'liyu_owner_email_v1',
+  OWNER_PHONE: 'liyu_owner_phone_v1',
+  STRIPE_COMING_SOON: 'liyu_stripe_coming_soon_v1',
+  SENT_EMAILS: 'liyu_sent_emails_v1',
 };
 
 const INITIAL_NOTIFICATIONS: NotificationItem[] = [
@@ -214,12 +273,189 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const [activeToast, setActiveToast] = useState<NotificationItem | null>(null);
 
+  // Products Catalog State (with localStorage persistence)
+  const [products, setProducts] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
+      if (saved) {
+        const parsed: Product[] = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map((p) => ({
+            ...p,
+            inStock: p.inStock !== false, // default to true if undefined
+          }));
+        }
+      }
+    } catch (e) {
+      console.warn('Could not read products from localStorage', e);
+    }
+    return PRODUCTS.map((p) => ({
+      ...p,
+      inStock: p.inStock !== false,
+    }));
+  });
+
+  // Product Types / Categories
+  const [productTypes, setProductTypes] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.TYPES);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.warn('Could not read product types from localStorage', e);
+    }
+    return DEFAULT_PRODUCT_TYPES;
+  });
+
+  // Customer Requests & Inquiries
+  const [requests, setRequests] = useState<CustomerRequest[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.REQUESTS);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.warn('Could not read requests from localStorage', e);
+    }
+    return INITIAL_REQUESTS;
+  });
+
+  // WhatsApp Concierge Configuration
+  const [whatsappConfig, setWhatsappConfig] = useState<WhatsAppConfig>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.WHATSAPP);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn('Could not read WhatsApp config from localStorage', e);
+    }
+    return DEFAULT_WHATSAPP_CONFIG;
+  });
+
+  // WhatsApp Concierge Widget Open State
+  const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
+  const toggleWhatsApp = () => setIsWhatsAppOpen((prev) => !prev);
+
+  const updateWhatsAppConfig = (config: Partial<WhatsAppConfig>) => {
+    setWhatsappConfig((prev) => {
+      const updated = { ...prev, ...config };
+      try {
+        localStorage.setItem(STORAGE_KEYS.WHATSAPP, JSON.stringify(updated));
+      } catch (e) {
+        console.warn('Failed to save whatsapp config', e);
+      }
+      return updated;
+    });
+  };
+
+  // Website Owner Alert Email & Phone settings (yeabserabruk1234@gmail.com)
+  const [ownerEmail, setOwnerEmail] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.OWNER_EMAIL);
+      if (saved) return saved;
+    } catch {}
+    return 'yeabserabruk1234@gmail.com';
+  });
+
+  const updateOwnerEmail = (email: string) => {
+    setOwnerEmail(email);
+    try {
+      localStorage.setItem(STORAGE_KEYS.OWNER_EMAIL, email);
+    } catch (e) {
+      console.warn('Failed to save owner email', e);
+    }
+  };
+
+  const [ownerPhone, setOwnerPhone] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.OWNER_PHONE);
+      if (saved) return saved;
+    } catch {}
+    return '+251911234567';
+  });
+
+  const updateOwnerPhone = (phone: string) => {
+    setOwnerPhone(phone);
+    try {
+      localStorage.setItem(STORAGE_KEYS.OWNER_PHONE, phone);
+    } catch (e) {
+      console.warn('Failed to save owner phone', e);
+    }
+  };
+
+  // Stripe Online Payments Status: "Coming Soon" while business documents are being finalized
+  const [stripeComingSoon, setStripeComingSoonState] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.STRIPE_COMING_SOON);
+      if (saved !== null) return JSON.parse(saved);
+    } catch {}
+    return true; // Default: Coming Soon enabled
+  });
+
+  const setStripeComingSoon = (val: boolean) => {
+    setStripeComingSoonState(val);
+    try {
+      localStorage.setItem(STORAGE_KEYS.STRIPE_COMING_SOON, JSON.stringify(val));
+    } catch (e) {
+      console.warn('Failed to save stripe coming soon state', e);
+    }
+  };
+
+  // Sent Emails Archive (Persisted in localStorage)
+  const [sentEmails, setSentEmails] = useState<EmailRecord[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.SENT_EMAILS);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn('Failed to parse sent emails', e);
+    }
+    return [];
+  });
+
+  const [lastDispatchedEmails, setLastDispatchedEmails] = useState<{
+    buyerEmail?: EmailRecord;
+    ownerEmail?: EmailRecord;
+  } | null>(null);
+
+  const sendEmailNotification = (
+    emailData: Omit<EmailRecord, 'id' | 'sentAt' | 'status'>
+  ): EmailRecord => {
+    const newRecord: EmailRecord = {
+      ...emailData,
+      id: `email-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
+      sentAt: new Date().toISOString(),
+      status: 'delivered',
+    };
+    setSentEmails((prev) => {
+      const updated = [newRecord, ...prev];
+      try {
+        localStorage.setItem(STORAGE_KEYS.SENT_EMAILS, JSON.stringify(updated.slice(0, 100)));
+      } catch (e) {
+        console.warn('Failed to save sent emails', e);
+      }
+      return updated;
+    });
+    return newRecord;
+  };
+
+  const clearSentEmails = () => {
+    setSentEmails([]);
+    try {
+      localStorage.removeItem(STORAGE_KEYS.SENT_EMAILS);
+    } catch (e) {
+      console.warn('Failed to clear sent emails', e);
+    }
+  };
+
   // Multi-page navigation state
   const [currentPage, setCurrentPage] = useState<AppPage>(() => {
     try {
-      const hash = window.location.hash.replace('#', '');
+      const hash = window.location.hash.replace('#', '').toLowerCase();
       if (hash === 'collections' || hash === 'hair-collections') return 'collections';
       if (hash === 'stores' || hash === 'our-stores') return 'stores';
+      if (hash === 'admin' || hash === 'admin-portal') return 'admin';
     } catch {
       // ignore
     }
@@ -229,6 +465,19 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [selectedCollectionDonor, setSelectedCollectionDonor] = useState<'all' | 'Double Donor' | 'Super Double Donor'>('all');
   const [selectedCollectionTexture, setSelectedCollectionTexture] = useState<string>('all');
   const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
+
+  // Sync with browser hash changes (e.g. back/forward button or external link)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'collections' || hash === 'hair-collections') setCurrentPage('collections');
+      else if (hash === 'stores' || hash === 'our-stores') setCurrentPage('stores');
+      else if (hash === 'admin' || hash === 'admin-portal') setCurrentPage('admin');
+      else if (!hash) setCurrentPage('home');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const navigateToPage = (
     page: AppPage,
@@ -252,7 +501,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (page === 'home') {
         window.history.pushState(null, '', window.location.pathname);
       } else {
-        window.history.pushState(null, '', `#${page === 'collections' ? 'hair-collections' : 'our-stores'}`);
+        const hash = page === 'collections' ? 'hair-collections' : page === 'stores' ? 'our-stores' : 'admin';
+        window.history.pushState(null, '', `#${hash}`);
       }
     } catch {
       // ignore
@@ -327,6 +577,343 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       console.warn('Failed to save notifications', e);
     }
   }, [notifications]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+    } catch (e) {
+      console.warn('Failed to save products', e);
+    }
+  }, [products]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.TYPES, JSON.stringify(productTypes));
+    } catch (e) {
+      console.warn('Failed to save product types', e);
+    }
+  }, [productTypes]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(requests));
+    } catch (e) {
+      console.warn('Failed to save requests', e);
+    }
+  }, [requests]);
+
+  // Product CRUD & Stock Management
+  const addProduct = (
+    productData: Omit<Product, 'id' | 'slug' | 'rating' | 'reviewCount'>
+  ): Product => {
+    const slug = productData.name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+    const id = `liyu-${slug || 'custom'}-${Date.now().toString().slice(-4)}`;
+    
+    // Auto-generate variants if none provided or basic
+    const generatedVariants: ProductVariant[] =
+      productData.variants && productData.variants.length > 0
+        ? productData.variants
+        : (productData.availableLengths || [20, 22, 24]).flatMap((len, lenIdx) =>
+            (productData.availableColors || ['Black']).map((col, colIdx) => ({
+              id: `${slug}-${col.toString().toLowerCase().slice(0, 3)}-${len}-${lenIdx}-${colIdx}`,
+              color: col as any,
+              length: len,
+              price: productData.basePrice + (len - (productData.availableLengths[0] || 20)) * 2.5,
+              inStock: productData.inStock !== false,
+              sku: `LY-${slug.toUpperCase().slice(0, 4)}-${len}`,
+            }))
+          );
+
+    const newProd: Product = {
+      ...productData,
+      id,
+      slug,
+      rating: 5.0,
+      reviewCount: 1,
+      inStock: productData.inStock !== false,
+      variants: generatedVariants,
+      catalogNumber: products.length + 1,
+    };
+
+    setProducts((prev) => [newProd, ...prev]);
+
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Product Published',
+      message: `${newProd.name} is now live in the catalog.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3500);
+
+    return newProd;
+  };
+
+  const updateProduct = (id: string, updates: Partial<Product>) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== id) return p;
+        return { ...p, ...updates };
+      })
+    );
+
+    // If active product in modal was updated, sync it
+    if (selectedProduct?.id === id) {
+      setSelectedProduct((prev) => (prev ? { ...prev, ...updates } : null));
+    }
+
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Product Updated',
+      message: `Changes saved for ${updates.name || 'product'}.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3000);
+  };
+
+  const deleteProduct = (id: string) => {
+    const prod = products.find((p) => p.id === id);
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+    if (selectedProduct?.id === id) {
+      setSelectedProduct(null);
+    }
+
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Product Removed',
+      message: `${prod?.name || 'Product'} was removed from catalog.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3000);
+  };
+
+  const toggleProductStock = (id: string) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== id) return p;
+        const newInStock = p.inStock === false;
+        const updatedVariants = (p.variants || []).map((v) => ({
+          ...v,
+          inStock: newInStock,
+        }));
+
+        const toastItem: NotificationItem = {
+          id: `toast-${Date.now()}`,
+          title: newInStock ? 'Marked In Stock' : 'Marked Out of Stock',
+          message: `${p.name} is now ${newInStock ? 'available in store' : 'marked out of stock'}.`,
+          timestamp: 'Just now',
+          type: 'system',
+          read: true,
+        };
+        setActiveToast(toastItem);
+        setTimeout(() => {
+          setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+        }, 3000);
+
+        return {
+          ...p,
+          inStock: newInStock,
+          variants: updatedVariants,
+        };
+      })
+    );
+  };
+
+  const toggleProductSale = (id: string, discountPercentage = 15) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== id) return p;
+        const willBeSale = !p.isFlashSale;
+        const toastItem: NotificationItem = {
+          id: `toast-${Date.now()}`,
+          title: willBeSale ? 'Product on Sale' : 'Sale Removed',
+          message: willBeSale
+            ? `${p.name} set to ${discountPercentage}% off.`
+            : `${p.name} returned to standard price.`,
+          timestamp: 'Just now',
+          type: 'system',
+          read: true,
+        };
+        setActiveToast(toastItem);
+        setTimeout(() => {
+          setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+        }, 3000);
+
+        return {
+          ...p,
+          isFlashSale: willBeSale,
+          discountPercentage: willBeSale ? discountPercentage : undefined,
+        };
+      })
+    );
+  };
+
+  const changeProductImage = (id: string, newImageUrl: string) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== id) return p;
+        const firstColor = p.availableColors?.[0] || 'Black';
+        return {
+          ...p,
+          images: [newImageUrl, ...(p.images?.slice(1) || [])],
+          colorImages: { ...(p.colorImages || {}), [firstColor as string]: newImageUrl },
+          colorThumbnails: { ...(p.colorThumbnails || {}), [firstColor as string]: newImageUrl },
+        };
+      })
+    );
+
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Picture Updated',
+      message: 'New product image saved successfully.',
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3000);
+  };
+
+  const resetProductsToDefault = () => {
+    setProducts(PRODUCTS.map((p) => ({ ...p, inStock: true })));
+    setProductTypes(DEFAULT_PRODUCT_TYPES);
+    try {
+      localStorage.removeItem(STORAGE_KEYS.PRODUCTS);
+      localStorage.removeItem(STORAGE_KEYS.TYPES);
+    } catch {
+      // ignore
+    }
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Catalog Restored',
+      message: 'Product catalog restored to pristine defaults.',
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3000);
+  };
+
+  // Product Types (Categories) Management
+  const addProductType = (type: string): boolean => {
+    const clean = type.trim();
+    if (!clean) return false;
+    if (productTypes.some((t) => t.toLowerCase() === clean.toLowerCase())) {
+      return false;
+    }
+    setProductTypes((prev) => [...prev, clean]);
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Product Type Added',
+      message: `"${clean}" category added to boutique navigation.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3000);
+    return true;
+  };
+
+  const removeProductType = (type: string): boolean => {
+    setProductTypes((prev) => prev.filter((t) => t !== type));
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Product Type Removed',
+      message: `Category "${type}" was removed.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3000);
+    return true;
+  };
+
+  // Customer Requests Management
+  const addCustomerRequest = (
+    requestData: Omit<CustomerRequest, 'id' | 'createdAt'>
+  ): CustomerRequest => {
+    const newReq: CustomerRequest = {
+      ...requestData,
+      id: `req-${Date.now().toString().slice(-6)}`,
+      createdAt: new Date().toISOString(),
+    };
+    setRequests((prev) => [newReq, ...prev]);
+
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'New Customer Request Received',
+      message: `${newReq.title} (${newReq.customerName}) logged.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 3500);
+
+    return newReq;
+  };
+
+  const updateRequestStatus = (id: string, status: RequestStatus, adminNotes?: string) => {
+    setRequests((prev) =>
+      prev.map((r) => {
+        if (r.id !== id) return r;
+        return {
+          ...r,
+          status,
+          updatedAt: new Date().toISOString(),
+          adminNotes: adminNotes !== undefined ? adminNotes : r.adminNotes,
+        };
+      })
+    );
+
+    const toastItem: NotificationItem = {
+      id: `toast-${Date.now()}`,
+      title: 'Request Status Updated',
+      message: `Marked as ${status.toUpperCase()}.`,
+      timestamp: 'Just now',
+      type: 'system',
+      read: true,
+    };
+    setActiveToast(toastItem);
+    setTimeout(() => {
+      setActiveToast((curr) => (curr?.id === toastItem.id ? null : curr));
+    }, 2800);
+  };
+
+  const deleteRequest = (id: string) => {
+    setRequests((prev) => prev.filter((r) => r.id !== id));
+  };
 
   // Cart operations
   const addToCart = (product: Product, variant: ProductVariant, quantity = 1) => {
@@ -405,7 +992,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const exists = prev.includes(productId);
       const updated = exists ? prev.filter((id) => id !== productId) : [...prev, productId];
       
-      const prod = PRODUCTS.find((p) => p.id === productId);
+      const prod = products.find((p) => p.id === productId);
       const toastItem: NotificationItem = {
         id: `toast-${Date.now()}`,
         title: exists ? 'Removed from Wishlist' : 'Saved to Wishlist',
@@ -435,7 +1022,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const newItem: BrowsingHistoryItem = {
         productId: product.id,
         viewedAt: Date.now(),
-        texture: product.category,
+        texture: product.category as any,
       };
       return [newItem, ...filtered].slice(0, 10);
     });
@@ -448,7 +1035,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const getPersonalizedRecommendations = (): Product[] => {
     if (browsingHistory.length === 0) {
-      return PRODUCTS.filter((p) => p.isBestseller || p.isNewArrival).slice(0, 4);
+      return products.filter((p) => p.isBestseller || p.isNewArrival).slice(0, 4);
     }
     // Extract preferred textures from history
     const viewedTextureCounts: Record<string, number> = {};
@@ -459,7 +1046,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const viewedProductIds = new Set(browsingHistory.map((h) => h.productId));
 
     // Score products based on similarity
-    const scored = PRODUCTS.map((prod) => {
+    const scored = products.map((prod) => {
       let score = 0;
       if (viewedTextureCounts[prod.category]) {
         score += viewedTextureCounts[prod.category] * 3;
@@ -590,11 +1177,105 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setActiveTrackingOrder(newOrder);
     clearCart();
 
+    const customerPhone = orderData.customerPhone || 'N/A';
+    const itemsSummary = orderData.items
+      .map((i) => `${i.productName} (${i.length}" / ${i.color}) x${i.quantity}`)
+      .join(', ');
+    const contactInfo = {
+      name: orderData.customerName,
+      email: orderData.customerEmail,
+      phone: customerPhone,
+      address: orderData.shippingAddress,
+      notes: orderData.customerNotes,
+    };
+
+    // Automatically generate and dispatch confirmation email to buyer
+    const buyerEmailContent = generateBuyerEmail(newOrder, contactInfo, ownerEmail);
+    const buyerRecord: EmailRecord = {
+      id: `email-buyer-${Date.now()}`,
+      recipientType: 'buyer',
+      recipientEmail: orderData.customerEmail,
+      recipientName: orderData.customerName,
+      senderEmail: ownerEmail,
+      subject: buyerEmailContent.subject,
+      htmlBody: buyerEmailContent.html,
+      textBody: buyerEmailContent.text,
+      orderId: newOrder.id,
+      sentAt: now.toISOString(),
+      status: 'delivered',
+      customerContact: {
+        name: contactInfo.name,
+        email: contactInfo.email,
+        phone: contactInfo.phone,
+        address: `${contactInfo.address.street}, ${contactInfo.address.city}, ${contactInfo.address.country}`,
+      },
+      itemsSummary,
+      totalAmount: orderData.total,
+    };
+
+    // Automatically generate and dispatch alert email to website owner (yeabserabruk1234@gmail.com)
+    const ownerEmailContent = generateOwnerAlertEmail(newOrder, contactInfo, ownerEmail);
+    const ownerRecord: EmailRecord = {
+      id: `email-owner-${Date.now()}`,
+      recipientType: 'owner',
+      recipientEmail: ownerEmail,
+      recipientName: 'LIYU Website Owner',
+      senderEmail: 'orders@liyuhair.com',
+      subject: ownerEmailContent.subject,
+      htmlBody: ownerEmailContent.html,
+      textBody: ownerEmailContent.text,
+      orderId: newOrder.id,
+      sentAt: now.toISOString(),
+      status: 'delivered',
+      customerContact: {
+        name: contactInfo.name,
+        email: contactInfo.email,
+        phone: contactInfo.phone,
+        address: `${contactInfo.address.street}, ${contactInfo.address.city}, ${contactInfo.address.country}`,
+      },
+      itemsSummary,
+      totalAmount: orderData.total,
+    };
+
+    // Store in sent emails history
+    setSentEmails((prev) => {
+      const updated = [buyerRecord, ownerRecord, ...prev];
+      try {
+        localStorage.setItem(STORAGE_KEYS.SENT_EMAILS, JSON.stringify(updated.slice(0, 100)));
+      } catch (e) {
+        console.warn('Failed to save sent emails', e);
+      }
+      return updated;
+    });
+
+    setLastDispatchedEmails({
+      buyerEmail: buyerRecord,
+      ownerEmail: ownerRecord,
+    });
+
+    // Automatically create a corresponding CustomerRequest for admin management
+    const newRequest: CustomerRequest = {
+      id: `req-${orderId.toLowerCase()}`,
+      type: 'order',
+      customerName: orderData.customerName,
+      customerEmail: orderData.customerEmail,
+      customerPhone: customerPhone,
+      title: `Order Request #${orderId}`,
+      details: `${orderData.items.length} item(s) reserved ($${orderData.total} USD). Shipping to: ${orderData.shippingAddress.street}, ${orderData.shippingAddress.city}, ${orderData.shippingAddress.country}. Buyer confirmation sent to ${orderData.customerEmail}. Owner alert sent to ${ownerEmail}.`,
+      status: 'pending',
+      createdAt: now.toISOString(),
+      totalAmount: orderData.total,
+      itemsSummary,
+      orderId,
+      adminNotes: `New order request via ${orderData.paymentMethod.toUpperCase()}. Stripe payments currently: Coming Soon. Email dispatched to buyer & owner.`,
+    };
+    setRequests((prev) => [newRequest, ...prev]);
+
     // Trigger Notification for new order
     const orderNotif: NotificationItem = {
       id: `order-created-${Date.now()}`,
-      title: `Order Placed: ${orderId}`,
-      message: `Your payment was processed. Tracking number ${trackingNumber} has been reserved.`,
+      title: `Order Request Confirmed: ${orderId}`,
+      message: `Emails dispatched to customer (${orderData.customerEmail}) and website owner (${ownerEmail}). Zero charge today.`,
       timestamp: 'Just now',
       type: 'order',
       read: false,
@@ -766,6 +1447,30 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setSelectedStoreId,
         navigateToPage,
 
+        products,
+        addProduct,
+        updateProduct,
+        deleteProduct,
+        toggleProductStock,
+        toggleProductSale,
+        changeProductImage,
+        resetProductsToDefault,
+
+        productTypes,
+        addProductType,
+        removeProductType,
+
+        requests,
+        addCustomerRequest,
+        updateRequestStatus,
+        deleteRequest,
+
+        whatsappConfig,
+        updateWhatsAppConfig,
+        isWhatsAppOpen,
+        setIsWhatsAppOpen,
+        toggleWhatsApp,
+
         isCartOpen,
         setIsCartOpen,
         isWishlistOpen,
@@ -787,6 +1492,19 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         complianceTab,
         setComplianceTab,
         openComplianceModal,
+
+        ownerEmail,
+        updateOwnerEmail,
+        ownerPhone,
+        updateOwnerPhone,
+        stripeComingSoon,
+        setStripeComingSoon,
+
+        sentEmails,
+        sendEmailNotification,
+        clearSentEmails,
+        lastDispatchedEmails,
+        setLastDispatchedEmails,
       }}
     >
       {children}

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { CheckCircle2, Shield, Eye, ArrowRight, Package, Sparkles } from 'lucide-react';
-import { PRODUCTS } from '../data/products';
 import { useStore } from '../context/StoreContext';
 
 export const RawHairSpotlight: React.FC = () => {
-  const { openProductModal } = useStore();
+  const { openProductModal, products } = useStore();
   const [activeTab, setActiveTab] = useState<'double' | 'super'>('double');
 
-  const doubleDonorProducts = PRODUCTS.filter((p) => p.donorCategory === 'Double Donor');
-  const superDoubleDonorProducts = PRODUCTS.filter((p) => p.donorCategory === 'Super Double Donor');
+  const doubleDonorProducts = products.filter((p) => p.donorCategory === 'Double Donor');
+  const superDoubleDonorProducts = products.filter((p) => p.donorCategory === 'Super Double Donor');
 
   return (
     <section id="donor-guide-section" className="py-24 bg-[#F5F0E6] border-y border-[#E2DBD0] relative overflow-hidden">

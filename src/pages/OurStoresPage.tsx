@@ -21,7 +21,7 @@ import { useStore } from '../context/StoreContext';
 import { STORES, StoreLocation } from '../data/stores';
 
 export const OurStoresPage: React.FC = () => {
-  const { navigateToPage, selectedStoreId, setSelectedStoreId } = useStore();
+  const { navigateToPage, selectedStoreId, setSelectedStoreId, addCustomerRequest } = useStore();
 
   const [activeStoreId, setActiveStoreId] = useState<string>(selectedStoreId || STORES[0].id);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -56,6 +56,21 @@ export const OurStoresPage: React.FC = () => {
       alert('Please fill in your name, contact phone, and desired appointment date.');
       return;
     }
+
+    addCustomerRequest({
+      type: 'consultation',
+      customerName: formData.fullName,
+      customerEmail: formData.email || undefined,
+      customerPhone: formData.phone,
+      title: `Consultation at ${selectedStore.name}`,
+      details: `Service: ${formData.service}. Notes: ${formData.notes || 'None specified'}`,
+      appointmentDate: formData.date,
+      appointmentTime: formData.time,
+      storeLocation: `${selectedStore.name} (${selectedStore.city})`,
+      status: 'confirmed',
+      adminNotes: `Online boutique reservation. Service: ${formData.service}`,
+    });
+
     setBookingSuccess(true);
     setTimeout(() => {
       // auto close modal after 3 seconds or allow user to dismiss
