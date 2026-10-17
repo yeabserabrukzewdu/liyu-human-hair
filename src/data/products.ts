@@ -193,13 +193,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      '/15.webp',
+      '/15.png',
     ],
     colorImages: {
-      Black: '/15.webp',
+      Black: '/15.png',
     },
     colorThumbnails: {
-      Black: '/15.webp',
+      Black: '/15.png',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
