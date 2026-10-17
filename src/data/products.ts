@@ -15,13 +15,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      '/4.webp',
+      '/1.webp',
     ],
     colorImages: {
-      Black: '/4.webp',
+      Black: '/1.webp',
     },
     colorThumbnails: {
-      Black: '/4.webp',
+      Black: '/1.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -238,13 +238,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [18, 20, 22, 24, 26, 28],
     images: [
-      '/1.webp',
+      '/4.webp',
     ],
     colorImages: {
-      Black: '/1.webp',
+      Black: '/4.webp',
     },
     colorThumbnails: {
-      Black: '/1.webp',
+      Black: '/4.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',

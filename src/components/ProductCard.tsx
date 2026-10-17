@@ -34,6 +34,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     toggleWishlist(product.id);
   };
 
+  // Resolve image for display on homepage product card
+  const cardImage =
+    product.id === 'liyu-deep-frizz'
+      ? '/15.png'
+      : (product.colorImages && defaultVariant?.color && product.colorImages[defaultVariant.color]) ||
+        product.images[0] ||
+        '/15.png';
+
   return (
     <div
       id={`product-card-${product.id}`}
@@ -45,7 +53,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       {/* Product Image Frame */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#F4EFE6]">
         <img
-          src={product.images[0]}
+          src={cardImage}
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"

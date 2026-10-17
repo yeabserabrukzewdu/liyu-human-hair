@@ -67,6 +67,8 @@ const CheckoutContent: React.FC = () => {
   const [phone, setPhone] = useState('+44 20 7946 0912');
   const [notes, setNotes] = useState('');
 
+  const [formError, setFormError] = useState<string | null>(null);
+
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
     if (!promoInput.trim()) return;
@@ -82,9 +84,10 @@ const CheckoutContent: React.FC = () => {
 
   const handleProcessOrderRequest = () => {
     if (!email || !phone || !firstName || !lastName) {
-      alert('Please fill in your name, email, and phone number so we can confirm your order.');
+      setFormError('Please fill in your full name, email address, and phone number so we can reserve your pieces and send confirmation emails.');
       return;
     }
+    setFormError(null);
 
     setIsProcessing(true);
 
@@ -646,6 +649,14 @@ const CheckoutContent: React.FC = () => {
                     . All items sold as 100% genuine virgin human hair bundles (1 piece price).
                   </p>
                 </div>
+
+                {/* FORM VALIDATION ERROR BANNER */}
+                {formError && (
+                  <div className="p-3 bg-rose-50 border border-rose-300 text-rose-800 text-xs rounded-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                    <span>{formError}</span>
+                  </div>
+                )}
 
                 {/* SUBMIT BUTTON */}
                 <div className="pt-2">

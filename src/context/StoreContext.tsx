@@ -154,7 +154,7 @@ const STORAGE_KEYS = {
   NOTIFICATIONS: 'liyu_notifications_v1',
   PUSH_PERM: 'liyu_push_perm_v1',
   COUPON: 'liyu_coupon_v1',
-  PRODUCTS: 'liyu_products_v4',
+  PRODUCTS: 'liyu_products_v5',
   TYPES: 'liyu_product_types_v3',
   REQUESTS: 'liyu_customer_requests_v3',
   WHATSAPP: 'liyu_whatsapp_config_v3',
@@ -280,10 +280,17 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (saved) {
         const parsed: Product[] = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed.map((p) => ({
-            ...p,
-            inStock: p.inStock !== false, // default to true if undefined
-          }));
+          return parsed.map((p) => {
+            const canonical = PRODUCTS.find((cp) => cp.id === p.id);
+            return {
+              ...p,
+              // Always guarantee images and colorImages reflect the latest canonical data
+              images: canonical?.images || p.images,
+              colorImages: canonical?.colorImages || p.colorImages,
+              colorThumbnails: canonical?.colorThumbnails || p.colorThumbnails,
+              inStock: p.inStock !== false, // default to true if undefined
+            };
+          });
         }
       }
     } catch (e) {
