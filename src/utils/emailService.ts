@@ -175,7 +175,7 @@ export function generateBuyerEmail(
 
     <!-- Footer -->
     <div style="background-color: #FAF7F2; border-top: 1px solid #DDD5C7; padding: 16px 24px; text-align: center; font-size: 11px; color: #7A8574;">
-      LIYU Human Hair Atelier · Bole Flagship Boutique & International Sourcing Hub<br/>
+      LIYU Human Hair Atelier · Bole Brass Flagship Boutique, KKare Building (Addis Ababa)<br/>
       100% Brazilian & Vietnamese Real Virgin Human Hair Bundles · 1 Piece Price
     </div>
   </div>

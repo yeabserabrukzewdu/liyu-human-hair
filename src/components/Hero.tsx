@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ShieldCheck, Sparkles, Truck, Award } from 'lucide-react';
+import { ArrowDown, ShieldCheck, Layers, Truck, Award } from 'lucide-react';
 import { Logo } from './Logo';
 
 interface HeroProps {
@@ -111,7 +111,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
           </div>
 
           <div className="flex items-start gap-3">
-            <Sparkles className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
+            <Layers className="w-4 h-4 text-[#95B373] mt-0.5 shrink-0" />
             <div>
               <h4 className="text-xs uppercase tracking-wider text-[#1B2017] font-semibold">Double & Super Double</h4>
               <p className="text-[11px] text-[#697262] mt-0.5">85%–90% & 100% equal length</p>

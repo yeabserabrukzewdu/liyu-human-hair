@@ -27,7 +27,6 @@ import {
   DollarSign,
   Eye,
   CheckCircle2,
-  Sparkles,
   Bell,
   FileText,
   Send,
@@ -39,6 +38,7 @@ import { EmailPreviewModal } from '../components/EmailPreviewModal';
 
 // Authentic bundle images available in /public
 const PRESET_BUNDLE_IMAGES = [
+  { path: '/19.png', label: 'Bole Brass Location (19.png)' },
   { path: '/18.png', label: 'Wave Human Hair (18.png)' },
   { path: '/17.png', label: 'Burmese Human Hair (17.png)' },
   { path: '/16.png', label: 'Deep Freeze / Deep Frizz (16.png)' },
@@ -490,7 +490,7 @@ export const AdminPage: React.FC = () => {
       recipientEmail: 'client@example.com',
       recipientName: 'Valued Client',
       senderEmail: ownerEmailSetting.trim(),
-      subject: `✨ [TEST] Order Confirmation & Reservation #LIYU-TEST-002 — LIYU Atelier`,
+      subject: `[TEST] Order Confirmation & Reservation #LIYU-TEST-002 — LIYU Atelier`,
       htmlBody: `
         <div style="font-family: sans-serif; padding: 20px; background: #fff; border: 1px solid #DDD5C7; border-radius: 4px;">
           <h2 style="color: #1B2017; margin-top: 0;">LIYU HUMAN HAIR ATELIER</h2>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Shield, Eye, ArrowRight, Package, Sparkles } from 'lucide-react';
+import { CheckCircle2, Shield, Eye, ArrowRight, Package } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
 export const RawHairSpotlight: React.FC = () => {

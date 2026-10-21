@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Sparkles } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
 export const WhatsAppToggle: React.FC = () => {

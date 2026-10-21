@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, MapPin, Search, Heart, ShoppingBag, Home } from 'lucide-react';
+import { Layers, MapPin, Search, Heart, ShoppingBag, Home } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
 export const MobileNavBar: React.FC = () => {
@@ -39,7 +39,7 @@ export const MobileNavBar: React.FC = () => {
           }`}
           aria-label="Hair Collections"
         >
-          <Sparkles className={`w-4 h-4 mb-0.5 ${currentPage === 'collections' ? 'text-[#95B373]' : 'text-[#6A7563]'}`} />
+          <Layers className={`w-4 h-4 mb-0.5 ${currentPage === 'collections' ? 'text-[#95B373]' : 'text-[#6A7563]'}`} />
           <span className="text-[9px] uppercase tracking-wider">Collections</span>
         </button>
 

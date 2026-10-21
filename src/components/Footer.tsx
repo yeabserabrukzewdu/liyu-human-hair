@@ -126,26 +126,21 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => navigateToPage('stores', { storeId: 'bole-flagship' })}
+                  onClick={() => navigateToPage('stores', { storeId: 'addis-bole-brass' })}
                   className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
                 >
-                  Bole Flagship (Addis Ababa)
+                  Addis Ababa Flagship (Bole Brass)
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => navigateToPage('stores', { storeId: 'kazanchis-vip' })}
-                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
+                  onClick={() => navigateToPage('stores', { storeId: 'usa-washington-maryland' })}
+                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer flex items-center gap-1.5"
                 >
-                  Kazanchis VIP Fitting Suite
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => navigateToPage('stores', { storeId: 'dubai-showroom' })}
-                  className="hover:text-[#95B373] text-left transition-colors cursor-pointer"
-                >
-                  Dubai Luxury Showroom
+                  <span>Washington DC & Maryland</span>
+                  <span className="text-[9px] uppercase font-bold text-amber-700 bg-amber-100 px-1 py-0.2 rounded-xs">
+                    Coming Soon
+                  </span>
                 </button>
               </li>
               <li>

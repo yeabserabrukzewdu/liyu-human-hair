@@ -13,7 +13,6 @@ import {
   Mail,
   Bell,
   Clock,
-  Sparkles,
   Phone,
   MessageCircle,
   AlertCircle,
@@ -191,7 +190,7 @@ const CheckoutContent: React.FC = () => {
           </div>
 
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <Check className="w-3.5 h-3.5 text-emerald-600" />
             <span>Order Request Received & Confirmed</span>
           </div>
 
@@ -680,7 +679,7 @@ const CheckoutContent: React.FC = () => {
                     )}
                   </button>
                   <p className="text-center text-[11px] text-[#6A7563] mt-2 font-medium">
-                    ✨ Zero charge today · Itemized confirmation sent to {email || 'your email'} · Alert sent to website owner ({ownerEmail})
+                    Zero charge today · Itemized confirmation sent to {email || 'your email'} · Alert sent to website owner ({ownerEmail})
                   </p>
                 </div>
               </div>

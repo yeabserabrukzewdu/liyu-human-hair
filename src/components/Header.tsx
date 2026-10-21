@@ -7,7 +7,6 @@ import {
   Menu, 
   X, 
   ChevronDown, 
-  Sparkles, 
   MapPin, 
   Layers, 
   ArrowRight,
@@ -376,9 +375,15 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
                           <h4 className="font-serif text-[15px] font-semibold text-[#1B2017] group-hover/store:text-[#95B373] transition-colors">
                             {store.name}
                           </h4>
-                          <span className="text-[10px] uppercase tracking-wider text-[#73806D] font-mono">
-                            {store.city}
-                          </span>
+                          {store.status === 'coming_soon' ? (
+                            <span className="text-[9px] uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-1.5 py-0.5 rounded-xs font-bold">
+                              Coming Soon
+                            </span>
+                          ) : (
+                            <span className="text-[10px] uppercase tracking-wider text-[#73806D] font-mono">
+                              {store.city}
+                            </span>
+                          )}
                         </div>
                         <p className="text-[11px] text-[#4E5A47] normal-case tracking-normal">
                           {store.address}
@@ -612,29 +617,23 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateSection }) => {
                   <button
                     onClick={() => {
                       setMobileMenuOpen(false);
-                      navigateToPage('stores', { storeId: 'bole-flagship' });
+                      navigateToPage('stores', { storeId: 'addis-bole-brass' });
                     }}
                     className="block text-left text-[#4C5946] hover:text-[#95B373] transition-colors"
                   >
-                    Bole Flagship Atelier (Addis Ababa)
+                    Addis Ababa Flagship (Bole Brass, KKare Building)
                   </button>
                   <button
                     onClick={() => {
                       setMobileMenuOpen(false);
-                      navigateToPage('stores', { storeId: 'kazanchis-vip' });
+                      navigateToPage('stores', { storeId: 'usa-washington-maryland' });
                     }}
-                    className="block text-left text-[#4C5946] hover:text-[#95B373] transition-colors"
+                    className="flex items-center justify-between w-full text-left text-[#4C5946] hover:text-[#95B373] transition-colors"
                   >
-                    Kazanchis VIP Fitting Suite
-                  </button>
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      navigateToPage('stores', { storeId: 'dubai-showroom' });
-                    }}
-                    className="block text-left text-[#4C5946] hover:text-[#95B373] transition-colors"
-                  >
-                    Dubai Luxury Showroom (Downtown)
+                    <span>Washington DC & Maryland (USA)</span>
+                    <span className="text-[9px] uppercase font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded-xs">
+                      Coming Soon
+                    </span>
                   </button>
                 </div>
               )}
