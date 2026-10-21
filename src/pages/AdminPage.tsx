@@ -39,12 +39,15 @@ import { EmailPreviewModal } from '../components/EmailPreviewModal';
 
 // Authentic bundle images available in /public
 const PRESET_BUNDLE_IMAGES = [
-  { path: '/1.webp', label: 'Wave Human Hair' },
+  { path: '/18.png', label: 'Wave Human Hair (18.png)' },
+  { path: '/17.png', label: 'Burmese Human Hair (17.png)' },
+  { path: '/16.png', label: 'Deep Freeze / Deep Frizz (16.png)' },
+  { path: '/15.png', label: 'Deep Frizz Alternate (15.png)' },
+  { path: '/1.webp', label: 'Wave Hair (1.webp)' },
   { path: '/2.webp', label: 'Ocean Wave (Vietnamese)' },
   { path: '/3.webp', label: 'Fumi Double Drawn' },
-  { path: '/4.webp', label: 'Burmese Human Hair' },
+  { path: '/4.webp', label: 'Burmese Hair (4.webp)' },
   { path: '/5.webp', label: 'Pixie Curl' },
-  { path: '/15.png', label: 'Deep Frizz (15.png)' },
   { path: '/6.webp', label: 'Deep Frizz Alternate (6.webp)' },
   { path: '/7.png', label: 'Raw Human Hair' },
   { path: '/8.png', label: 'Blonde Bundle' },

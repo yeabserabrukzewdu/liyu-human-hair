@@ -8,24 +8,28 @@ export const PRODUCTS: Product[] = [
     catalogNumber: 1,
     category: 'Wave',
     shortDescription: 'Premium human hair with a soft, flowing wave pattern. Sold as 1 Bundle.',
-    description: 'Premium human hair with a soft, flowing wave pattern. Designed for a natural, elegant look with movement and versatility. Available in multiple lengths in Black.',
+    description: 'Premium human hair with a soft, flowing wave pattern. Designed for a natural, elegant look with movement and versatility. Available in multiple lengths in Black and Blonde.',
     bundleNotice: 'Sold as 1 Bundle',
     basePrice: 80,
     maxPrice: 102,
-    availableColors: ['Black'],
+    availableColors: ['Black', 'Blonde'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
+      '/4.webp',
       '/1.webp',
     ],
     colorImages: {
-      Black: '/1.webp',
+      Black: '/4.webp',
+      Blonde: '/1.webp',
     },
     colorThumbnails: {
-      Black: '/1.webp',
+      Black: '/4.webp',
+      Blonde: '/1.webp',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
       'Double Donor: 85%–90% equal length from top to bottom',
+      'Available in Black and Blonde shades',
       'Intact unidirectionally aligned cuticles',
       'Soft, flowing wave pattern with natural luster',
       'Double micro-stitch reinforced sealed weft',
@@ -40,11 +44,18 @@ export const PRODUCTS: Product[] = [
     reviewCount: 142,
     isBestseller: true,
     variants: [
+      // BLACK
       { id: 'wv-blk-20', color: 'Black', length: 20, price: 80, inStock: true, sku: 'LY-WV-BLK-20' },
       { id: 'wv-blk-22', color: 'Black', length: 22, price: 85, inStock: true, sku: 'LY-WV-BLK-22' },
       { id: 'wv-blk-24', color: 'Black', length: 24, price: 92, inStock: true, sku: 'LY-WV-BLK-24' },
       { id: 'wv-blk-26', color: 'Black', length: 26, price: 97, inStock: true, sku: 'LY-WV-BLK-26' },
       { id: 'wv-blk-28', color: 'Black', length: 28, price: 102, inStock: true, sku: 'LY-WV-BLK-28' },
+      // BLONDE
+      { id: 'wv-bld-20', color: 'Blonde', length: 20, price: 80, inStock: true, sku: 'LY-WV-BLD-20' },
+      { id: 'wv-bld-22', color: 'Blonde', length: 22, price: 85, inStock: true, sku: 'LY-WV-BLD-22' },
+      { id: 'wv-bld-24', color: 'Blonde', length: 24, price: 92, inStock: true, sku: 'LY-WV-BLD-24' },
+      { id: 'wv-bld-26', color: 'Blonde', length: 26, price: 97, inStock: true, sku: 'LY-WV-BLD-26' },
+      { id: 'wv-bld-28', color: 'Blonde', length: 28, price: 102, inStock: true, sku: 'LY-WV-BLD-28' },
     ],
   },
   {
@@ -193,13 +204,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [20, 22, 24, 26, 28],
     images: [
-      '/15.png',
+      '/16.png',
     ],
     colorImages: {
-      Black: '/15.png',
+      Black: '/16.png',
     },
     colorThumbnails: {
-      Black: '/15.png',
+      Black: '/16.png',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -238,13 +249,13 @@ export const PRODUCTS: Product[] = [
     availableColors: ['Black'],
     availableLengths: [18, 20, 22, 24, 26, 28],
     images: [
-      '/4.webp',
+      '/17.png',
     ],
     colorImages: {
-      Black: '/4.webp',
+      Black: '/17.png',
     },
     colorThumbnails: {
-      Black: '/4.webp',
+      Black: '/17.png',
     },
     features: [
       'Brazilian Human Hair — 1 Piece Price',
@@ -282,25 +293,27 @@ export const PRODUCTS: Product[] = [
     bundleNotice: 'Sold as 1 Bundle',
     basePrice: 76,
     maxPrice: 89,
-    availableColors: ['Black', 'Coffee Brown', 'Highlight'],
+    availableColors: ['Ash Blonde', 'Coffee Brown', 'Highlight'],
     availableLengths: [16, 18, 20],
     images: [
       '/2.webp',
     ],
     colorImages: {
-      Black: '/2.webp',
+      'Ash Blonde': '/2.webp',
       'Coffee Brown': '/10.png',
       Highlight: '/2.webp',
+      Black: '/2.webp',
     },
     colorThumbnails: {
-      Black: '/2.webp',
+      'Ash Blonde': '/2.webp',
       'Coffee Brown': '/10.png',
       Highlight: '/2.webp',
+      Black: '/2.webp',
     },
     features: [
       'Vietnamese Human Hair — 1 Piece Price',
       'Super Double Donor: 100% equal length from top to bottom',
-      'Available in Black, Coffee Brown & Highlight',
+      'Available in Ash Blonde, Coffee Brown & Highlight',
       'Rhythmic fluid waves that hold in any climate',
       'Micro-wefted with reinforced borders',
     ],
@@ -315,10 +328,10 @@ export const PRODUCTS: Product[] = [
     isFlashSale: true,
     discountPercentage: 15,
     variants: [
-      // BLACK
-      { id: 'ow-blk-16', color: 'Black', length: 16, price: 76, inStock: true, sku: 'LY-OW-BLK-16' },
-      { id: 'ow-blk-18', color: 'Black', length: 18, price: 81, inStock: true, sku: 'LY-OW-BLK-18' },
-      { id: 'ow-blk-20', color: 'Black', length: 20, price: 87, inStock: true, sku: 'LY-OW-BLK-20' },
+      // ASH BLONDE
+      { id: 'ow-asb-16', color: 'Ash Blonde', length: 16, price: 76, inStock: true, sku: 'LY-OW-ASB-16' },
+      { id: 'ow-asb-18', color: 'Ash Blonde', length: 18, price: 81, inStock: true, sku: 'LY-OW-ASB-18' },
+      { id: 'ow-asb-20', color: 'Ash Blonde', length: 20, price: 87, inStock: true, sku: 'LY-OW-ASB-20' },
       // COFFEE BROWN
       { id: 'ow-cfb-16', color: 'Coffee Brown', length: 16, price: 78, inStock: true, sku: 'LY-OW-CFB-16' },
       { id: 'ow-cfb-18', color: 'Coffee Brown', length: 18, price: 83, inStock: true, sku: 'LY-OW-CFB-18' },

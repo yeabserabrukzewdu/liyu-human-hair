@@ -154,7 +154,7 @@ const STORAGE_KEYS = {
   NOTIFICATIONS: 'liyu_notifications_v1',
   PUSH_PERM: 'liyu_push_perm_v1',
   COUPON: 'liyu_coupon_v1',
-  PRODUCTS: 'liyu_products_v5',
+  PRODUCTS: 'liyu_products_v8',
   TYPES: 'liyu_product_types_v3',
   REQUESTS: 'liyu_customer_requests_v3',
   WHATSAPP: 'liyu_whatsapp_config_v3',
@@ -288,6 +288,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               images: canonical?.images || p.images,
               colorImages: canonical?.colorImages || p.colorImages,
               colorThumbnails: canonical?.colorThumbnails || p.colorThumbnails,
+              availableColors: canonical?.availableColors || p.availableColors,
+              variants: canonical?.variants || p.variants,
+              features: canonical?.features || p.features,
               inStock: p.inStock !== false, // default to true if undefined
             };
           });

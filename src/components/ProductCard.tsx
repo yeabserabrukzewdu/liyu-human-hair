@@ -36,11 +36,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   // Resolve image for display on homepage product card
   const cardImage =
-    product.id === 'liyu-deep-frizz'
-      ? '/15.png'
-      : (product.colorImages && defaultVariant?.color && product.colorImages[defaultVariant.color]) ||
-        product.images[0] ||
-        '/15.png';
+    (product.colorImages && defaultVariant?.color && product.colorImages[defaultVariant.color]) ||
+    product.images[0] ||
+    (product.id === 'liyu-deep-frizz' ? '/16.png' : '/18.png');
 
   return (
     <div
